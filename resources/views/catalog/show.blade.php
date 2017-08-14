@@ -22,7 +22,14 @@
                     <div class="product-page__title">{{ $product->node->title }}</div>
                     <div class="product-page__desc">Calatrava 5960 WG Limited Edition</div>
                     <div class="product-page__desc-sec">18-к белое золото</div>
-                    <div class="product-page__price">640 000 тг</div>
+                    <?php
+                    $price = [
+                        1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
+                        2 => isset($product->node->fields->price_2) ? $product->node->fields->price_2 : '',
+                        3 => isset($product->node->fields->price_3) ? $product->node->fields->price_3 : '',
+                    ];
+                    ?>
+                    <div class="product__price">{{ $price[$category->id] }} тг</div>
                     <div class="product-page__price-dollar">~ 1 969 $</div>
                     <button class="btn btn-default">Заказать</button>
                 </div>

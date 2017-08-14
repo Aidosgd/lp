@@ -2068,7 +2068,7 @@
                                 <div class="product__title">{{ $product->node->title }}</div>
                                 <div class="product__desc">Calatrava 5960 WG Limited Edition</div>
                                 <div class="product__desc-sec">18-к белое золото</div>
-                                <div class="product__price">640 000 тг</div>
+                                <div class="product__price">{{ isset($product->node->fields->price_1) ? $product->node->fields->price_1 : ''}} тг</div>
                                 <div class="product__price-dollar">~ 1 969 $</div>
                             </a>
                         </div>
