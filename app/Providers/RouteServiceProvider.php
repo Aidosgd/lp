@@ -70,22 +70,8 @@ class RouteServiceProvider extends ServiceProvider
             return;
         }
 
-        $curLocale = in_array($segment, config('app.locales'))
-            ? $segment
-            : config('app.locales', [])[0];
-
-        $router->bind('lang', function($lang) use ($curLocale)
-        {
-            return $curLocale;
-        });
-
-        $this->app->setLocale($curLocale);
-
-        $this->app['view']->share('lang', $curLocale);
-
         $group = [
             'namespace' => $this->namespace,
-            'prefix' => '{lang?}',
             'middleware' => ['web']
         ];
 

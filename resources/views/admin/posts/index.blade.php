@@ -95,8 +95,8 @@
               <th><label  class="i-checks m-b-none js-check-checkbox"><input onchange="applyBulkCheck($(this))" type="checkbox"><i></i></label></th>
             <th>{{ trans('content::default.posts.id') }}</th>
             <th>{{ trans('content::default.posts.title') }}</th>
-            <th>{{ trans('content::default.posts.category') }}</th>
-            <th>{{ trans('content::default.posts.user') }}</th>
+            <th>Колекция</th>
+            <th>Цена</th>
             <th>{{ trans('social::default.moderation.approved') }}</th>
             <th>{{ trans('admin::default.actions.label') }}</th>
             <th>{{ trans('admin::default.dates') }}</th>
@@ -116,8 +116,15 @@
                     @endif
                     {{ $post->node->title }}
                 </td>
-                <td>{{ $post->category->node->title }}</td>
-                <td>{{ $post->author->name }}</td>
+                <td>{{ strip_tags($post->node->teaser) }}</td>
+                <?php
+                $price = [
+                    1 => isset($post->node->fields->price_1) ? $post->node->fields->price_1 : '',
+                    2 => isset($post->node->fields->price_2) ? $post->node->fields->price_2 : '',
+                    3 => isset($post->node->fields->price_3) ? $post->node->fields->price_3 : '',
+                ];
+                ?>
+                <td>{{ $price[$post->category->id] }}</td>
                 <td>
                   <label class="i-switch bg-info m-t-xs m-r">
                     <input type="checkbox" ng-model="approval.post_{{ $post->id }}" ng-change="approve({{ $post->id }})">

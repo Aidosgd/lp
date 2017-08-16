@@ -8,12 +8,16 @@
                     <div class="picture row">
                         <div class="col-md-4">
                             <div id="bx-pager">
-                                <a data-slide-index="0" href=""><img class="img-responsive" src="{{ $product->images->first()->path }}" /></a>
+                                @foreach($product->images as $index => $image)
+                                    <a data-slide-index="{{ $index }}" href=""><img class="img-responsive" src="{{ $image->path }}" /></a>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-md-8">
                             <ul class="bxslider">
-                                <li><img class="img-responsive" src="{{ $product->images->first()->path }}" /></li>
+                                @foreach($product->images as $image)
+                                    <li><img class="img-responsive" src="{{ $image->path }}" /></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -23,14 +27,15 @@
                     <div class="product-page__desc">Calatrava 5960 WG Limited Edition</div>
                     <div class="product-page__desc-sec">18-к белое золото</div>
                     <?php
-                    $price = [
-                        1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
-                        2 => isset($product->node->fields->price_2) ? $product->node->fields->price_2 : '',
-                        3 => isset($product->node->fields->price_3) ? $product->node->fields->price_3 : '',
-                    ];
+                        $price = [
+                            1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
+                            2 => isset($product->node->fields->price_2) ? $product->node->fields->price_2 : '',
+                            3 => isset($product->node->fields->price_3) ? $product->node->fields->price_3 : '',
+                        ];
+                        $price_d = $price[$category->id] / $currencies;
                     ?>
                     <div class="product__price">{{ $price[$category->id] }} тг</div>
-                    <div class="product-page__price-dollar">~ 1 969 $</div>
+                    <div class="product-page__price-dollar">~ {{ number_format($price_d) }} $</div>
                     <button class="btn btn-default">Заказать</button>
                 </div>
                 <div class="col-md-4">

@@ -122,7 +122,7 @@ class PostsController extends Controller {
 
 		$posts = $posts->orderBy('display_date', 'desc')->latest()->paginate(config('admin.pagination'))->appends($appends);
 
-		return view('content::posts.index', [
+		return view('admin.posts.index', [
 			'posts' => $posts,
 			'root' => $root,
 			'users' => $users,
@@ -159,7 +159,7 @@ class PostsController extends Controller {
 
         $users = (new $userClass)->newQuery()->pluck('name', 'id');
 
-		return view('posts.form',
+		return view('admin.posts.form',
 			[
 				'post' => null,
 				'users' => $users,
@@ -343,7 +343,7 @@ class PostsController extends Controller {
 //		$image = $post->images()->withPivot('title', 'alt', 'cropped_coords')->first();
         $images = $post->images()->orderBy('sort_order')->get();
 
-		return view('posts.form',
+		return view('admin.posts.form',
 			[
 				'post' => $post,
                 'images' => $images,

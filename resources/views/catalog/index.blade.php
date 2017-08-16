@@ -92,10 +92,10 @@
                 <div class="col-md-9 catalog-content">
                     <div class="top-content">
                         <div class="categories">
-                            <ul class="nav nav-pills">
-                                <li class="active"><a href="#">Швейцарские часы</a></li>
-                                <li><a href="#">Ювелирные украшения</a></li>
-                                <li><a href="#">Аксессуары</a></li>
+                            <ul class="nav nav-pills catalog-menu">
+                                <li><a href="/catalog/clocks">Швейцарские часы</a></li>
+                                <li><a href="/catalog/jewelries">Ювелирные украшения</a></li>
+                                <li><a href="/catalog/accessories">Аксессуары</a></li>
                             </ul>
                         </div>
                         <div class="pull-right sort-by">
@@ -115,7 +115,7 @@
                                     <div class="product">
                                         <a href="/catalog/{{ $category->node->slug }}/{{ $product->node->slug }}">
                                             <img class="img-responsive" src="{{ $product->images->first()->path }}" alt="">
-                                            <div class="product__title">{{ $product->node->title }}</div>
+                                            <div class="product__title">{{ str_limit($product->node->title, 15) }}</div>
                                             <div class="product__desc">Calatrava 5960 WG Limited Edition</div>
                                             <div class="product__desc-sec">18-к белое золото</div>
                                             <?php
@@ -124,9 +124,10 @@
                                                     2 => isset($product->node->fields->price_2) ? $product->node->fields->price_2 : '',
                                                     3 => isset($product->node->fields->price_3) ? $product->node->fields->price_3 : '',
                                                 ];
+                                                $price_d = $price[$category->id] / $currencies;
                                             ?>
                                             <div class="product__price">{{ $price[$category->id] }} тг</div>
-                                            <div class="product__price-dollar">~ 1 969 $</div>
+                                            <div class="product__price-dollar">~ {{ number_format($price_d) }} $</div>
                                         </a>
                                     </div>
                                 </div>
@@ -158,4 +159,15 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        // Main menu active li elements
+        $('.catalog-menu a').each(function(){
+            var href = $(this).attr('href').replace( '#', '').split('/').pop();
+            var url = window.location.href.split('/').pop();
+            if(url == href)
+                $(this).closest('li').addClass('active');
+        });
+    </script>
 @endsection
