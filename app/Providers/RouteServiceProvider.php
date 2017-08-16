@@ -53,10 +53,48 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::group([
-            'middleware' => 'web',
+        $router = $this->app['router'];
+
+        $segment = $this->app['request']->segment(1);
+
+        if($segment == config('admin.uri')){
+
+            $router->group([
+                'namespace' => $this->namespace,
+                'prefix' => config('admin.uri'),
+                'middleware' => config('admin.middlewares')], function($router)
+            {
+                require base_path('routes/admin_web.php');
+            });
+
+            return;
+        }
+
+        $curLocale = in_array($segment, config('app.locales'))
+            ? $segment
+            : config('app.locales', [])[0];
+
+        $router->bind('lang', function($lang) use ($curLocale)
+        {
+            return $curLocale;
+        });
+
+        $this->app->setLocale($curLocale);
+
+        $this->app['view']->share('lang', $curLocale);
+
+        $group = [
             'namespace' => $this->namespace,
-        ], function ($router) {
+            'prefix' => '{lang?}',
+            'middleware' => ['web']
+        ];
+
+        $without_lang_group = [
+            'namespace' => $this->namespace,
+            'middleware' => ['web']
+        ];
+
+        Route::group($group, function ($router) {
             require base_path('routes/web.php');
         });
     }
