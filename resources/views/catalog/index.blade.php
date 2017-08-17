@@ -2,42 +2,45 @@
 
 @section('styles')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        [v-cloak] {
+            display: none
+        }
+    </style>
 @endsection
 
 @section('content')
-    <div class="catalog">
+    <div class="catalog" id="app">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3 catalog-sidebar">
                     <h4>Отобрать по</h4>
+                    @{{ filterData }}
                     <div class="checked-label">
-                        <label>Часы с пробегом <i class="fa fa-close"></i></label>
-                        <label>Rolex <i class="fa fa-close"></i></label>
-                        <label>PATEK PHILIPPE <i class="fa fa-close"></i></label>
-                        <span><i class="fa fa-refresh"></i> Сбросить все</span>
+                        <label v-for="name in checkedNames">@{{ name }} <i @click="closeLabel(name)" class="fa fa-close"></i></label>
+                        <span v-if="checkedNames.length" @click="clearCheckedNames()"><i class="fa fa-refresh"></i> Сбросить все</span>
                     </div>
-                    <h4>Состояние</h4>
-                    <div class="checkbox-filter radio-checkbox">
-                        <input id="check1" type="checkbox" name="check" value="check1">
-                        <label for="check1">Абсолютно новые</label>
-                        <br>
-                        <input id="check2" type="checkbox" name="check" value="check2">
-                        <label for="check2">Часы с пробегом</label>
+                    <div v-if="productCondition.length">
+                        <h4>Состояние</h4>
+                        <div class="checkbox-filter radio-checkbox">
+                            <div v-for="(condition, index) in productCondition" v-cloak>
+                                <input @click="checkFilter($event)" :data-value="index" data-filter="product_condition" v-bind:id="'condition' + index" type="checkbox" name="check" v-model="checkedNames" v-bind:value="condition.title">
+                                <label v-bind:for="'condition' + index">@{{ condition.title }}</label>
+                            </div>
+                        </div>
                     </div>
                     <h4>Бренд</h4>
                     <div class="modal-filter">
                         <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Выбрать бренд</button>
                     </div>
-                    <h4>Кому</h4>
-                    <div class="checkbox-filter radio-checkbox">
-                        <input id="check3" type="checkbox" name="check" value="check3">
-                        <label for="check3">Женские</label>
-                        <br>
-                        <input id="check4" type="checkbox" name="check" value="check4">
-                        <label for="check4">Мужские</label>
-                        <br>
-                        <input id="check5" type="checkbox" name="check" value="check5">
-                        <label for="check5">Унисекс</label>
+                    <div v-if="productSex.length">
+                        <h4>Кому</h4>
+                        <div class="checkbox-filter radio-checkbox">
+                            <div v-for="(sex, index) in productSex" v-cloak>
+                                <input @click="checkFilter($event)" :data-value="index" data-filter="product_sex" v-bind:id="'sex' + index" type="checkbox" name="check" v-model="checkedNames" v-bind:value="sex.title">
+                                <label v-bind:for="'sex' + index">@{{ sex.title }}</label>
+                            </div>
+                        </div>
                     </div>
                     <h4>Стоимость</h4>
                     <div class="range-filter">
@@ -47,48 +50,14 @@
                             до <input type="text" id="amount2" readonly> тг
                         </div>
                     </div>
-                    <h4 class="collapsed" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Стоимость <i class="fa fa-caret-down"></i></h4>
-                    <div class="checkbox-filter radio-checkbox">
-                        <div class="collapse" id="collapseExample">
+                    <div v-if="productType.length">
+                        <h4>Тип</h4>
+                        <div class="checkbox-filter radio-checkbox">
                             <div class="checkbox-filter radio-checkbox">
-                                <input id="check6" type="checkbox" name="check" value="check6">
-                                <label for="check6">Женские</label>
-                                <br>
-                                <input id="check7" type="checkbox" name="check" value="check7">
-                                <label for="check7">Мужские</label>
-                                <br>
-                                <input id="check8" type="checkbox" name="check" value="check8">
-                                <label for="check8">Унисекс</label>
-                            </div>
-                        </div>
-                    </div>
-                    <h4 class="collapsed" role="button" data-toggle="collapse" href="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">Стоимость <i class="fa fa-caret-down"></i></h4>
-                    <div class="checkbox-filter radio-checkbox">
-                        <div class="collapse" id="collapseExample2">
-                            <div class="checkbox-filter radio-checkbox">
-                                <input id="check9" type="checkbox" name="check" value="check9">
-                                <label for="check9">Женские</label>
-                                <br>
-                                <input id="check10" type="checkbox" name="check" value="check10">
-                                <label for="check10">Мужские</label>
-                                <br>
-                                <input id="checck11" type="checkbox" name="check" value="checck11">
-                                <label for="checck11">Унисекс</label>
-                            </div>
-                        </div>
-                    </div>
-                    <h4 class="collapsed" role="button" data-toggle="collapse" href="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">Стоимость <i class="fa fa-caret-down"></i></h4>
-                    <div class="checkbox-filter radio-checkbox">
-                        <div class="collapse" id="collapseExample3">
-                            <div class="checkbox-filter radio-checkbox">
-                                <input id="check12" type="checkbox" name="check" value="check12">
-                                <label for="check12">Женские</label>
-                                <br>
-                                <input id="check13" type="checkbox" name="check" value="check13">
-                                <label for="check13">Мужские</label>
-                                <br>
-                                <input id="check14" type="checkbox" name="check" value="check14">
-                                <label for="check14">Унисекс</label>
+                                <div v-for="(type, index) in productType" v-cloak>
+                                    <input @click="checkFilter($event)" :data-value="index" data-filter="product_type" v-bind:id="'type' + index" type="checkbox" name="check" v-model="checkedNames" v-bind:value="type.title">
+                                    <label v-bind:for="'type' + index">@{{ type.title }}</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -114,38 +83,21 @@
 
                     <div class="main-products">
                         <div class="row">
-                            @foreach($products as $product)
-                                <div class="col-md-3">
-                                    <div class="product">
-                                        <a href="/catalog/{{ $category->node->slug }}/{{ $product->node->slug }}">
-                                            <img class="img-responsive" src="{{  $product->images->count() ? $product->images->first()->path : '' }}" alt="">
-                                            <?php
-                                                $manufacturer = [
-                                                    1 => isset($product->node->fields->manufacturer_1) ? $product->node->fields->manufacturer_1 : '',
-                                                    2 => isset($product->node->fields->manufacturer_2) ? $product->node->fields->manufacturer_2 : '',
-                                                    3 => isset($product->node->fields->manufacturer_3) ? $product->node->fields->manufacturer_3 : '',
-                                                ];
-                                            ?>
-                                            <div class="product__title">{{ $fields->options['options']['ru'][$manufacturer[$product->category->id]] }}</div>
-                                            <div class="product__desc">{{ str_limit($product->node->title, 25) }}</div>
-                                            @if(isset($product->node->fields->product_material_case))<div class="product__desc-sec">{{ $fields2->options['options']['ru'][$product->node->fields->product_material_case] }}</div>@endif
-                                            <?php
-                                                $price = [
-                                                    1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
-                                                    2 => isset($product->node->fields->price_2) ? $product->node->fields->price_2 : '',
-                                                    3 => isset($product->node->fields->price_3) ? $product->node->fields->price_3 : '',
-                                                ];
-                                                $price_d = $price[$category->id] / $currencies;
-                                            ?>
-                                            <div class="product__price">{{ $price[$category->id] }} тг</div>
-                                            <div class="product__price-dollar">~ {{ number_format($price_d) }} $</div>
-                                        </a>
-                                    </div>
+                            <div v-for="product in products" v-cloak class="col-md-3">
+                                <div class="product">
+                                    <a v-bind:href="product.link">
+                                        <img class="img-responsive" v-bind:src="product.img">
+                                        <div class="product__title">@{{ product.brand }}</div>
+                                        <div class="product__desc">@{{ product.title }}</div>
+                                        <div class="product__desc-sec">@{{ product.product_material_case }}</div>
+                                        <div class="product__price">@{{ product.price }} тг</div>
+                                        <div class="product__price-dollar">~ @{{ product.price_d }} $</div>
+                                    </a>
                                 </div>
-                                @if($loop->iteration == 4)
-                                    <div class="clearfix"></div>
-                                @endif
-                            @endforeach
+                            </div>
+                        </div>
+                        <div class="row hidden">
+
                         </div>
                     </div>
                 </div>
@@ -172,6 +124,9 @@
 </div>
 @endsection
 @section('scripts')
+    <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         // Main menu active li elements
         $('.catalog-menu a').each(function(){
@@ -180,15 +135,12 @@
             if(url == href)
                 $(this).closest('li').addClass('active');
         });
-    </script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
         $( function() {
             $( "#slider-range" ).slider({
                 range: true,
-                min: 0,
-                max: 500,
-                values: [ 75, 300 ],
+                min: {{ $minPrice }},
+                max: {{ $maxPrice }},
+                values: [ {{ $minPrice }}, {{ $maxPrice }} ],
                 slide: function( event, ui ) {
                     $( "#amount" ).val(ui.values[ 0 ] );
                     $( "#amount2" ).val(ui.values[ 1 ] );
@@ -197,5 +149,61 @@
             $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ));
             $( "#amount2" ).val($( "#slider-range" ).slider( "values", 1 ));
         } );
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                products: {!! $products !!},
+                productCondition: {!! $productCondition !!},
+                productSex: {!! isset($productSex) ? $productSex : '""' !!},
+                productType: {!! isset($productType) ? $productType : '""' !!},
+                checkedNames: [],
+                filterData: []
+            },
+
+            methods: {
+                clearCheckedNames: function clearCheckedNames(){
+                    this.checkedNames = []
+                },
+                closeLabel: function closeLabel(name){
+                    var found = this.checkedNames.indexOf(name);
+
+                    while (found !== -1) {
+                        this.checkedNames.splice(found, 1);
+                        found = this.checkedNames.indexOf(name);
+                    }
+                },
+                checkFilter: function checkFilter(event){
+                    var input = event.target,
+                        value = $(input).data('value'),
+                        filter = $(input).data('filter');
+                    this.filterData.push([value, filter]);
+                    this.sentRequest();
+                },
+                sentRequest: function sentRequest(){
+                    var category = '{{ $category->node->slug }}';
+                    this.$http.post('/catalog/'+ category, this.filterData).then(function (response) {
+                        if (response.status == 200) {
+                            console.log(response.data);
+                            if(response.data.length == 0) {
+                                this.requestIsSended = false;
+                                this.notFoundSpeakers = true;
+                            }
+                            else {
+                                this.speakers = response.data;
+                                this.activeSpeaker = this.speakers[0];
+                                this.speakers[0].isActive = true;
+                                this.requestIsSended = false;
+                                this.notFoundSpeakers = false;
+                            }
+                        }
+                    });
+
+                }
+            },
+
+            created: function created() {
+            }
+        })
     </script>
 @endsection
