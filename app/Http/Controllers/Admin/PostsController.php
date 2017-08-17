@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use Ibec\Admin\Fields\Field;
 use Ibec\Content\Category;
 use Ibec\Content\Root;
 use Ibec\Content\Post;
@@ -121,6 +122,12 @@ class PostsController extends Controller {
 		}
 
 		$posts = $posts->orderBy('display_date', 'desc')->latest()->paginate(config('admin.pagination'))->appends($appends);
+        $manufacturer = [
+            1 => 'manufacturer_1',
+            2 => 'manufacturer_2',
+            3 => 'manufacturer_3',
+        ];
+		$fields = Field::where('slug', $manufacturer[$root->id])->first();
 
 		return view('admin.posts.index', [
 			'posts' => $posts,
@@ -131,6 +138,7 @@ class PostsController extends Controller {
 			'user' => $user_id,
 			'title' => $title,
 			'categories' => $categoriesWithNodes,
+			'fields' => $fields,
 			'batchAction' => admin_route('content.roots.posts.deleteBatch', [$root->slug])]);
 	}
 

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+@endsection
+
 @section('content')
     <div class="catalog">
         <div class="container-fluid">
@@ -114,10 +118,17 @@
                                 <div class="col-md-3">
                                     <div class="product">
                                         <a href="/catalog/{{ $category->node->slug }}/{{ $product->node->slug }}">
-                                            <img class="img-responsive" src="{{ $product->images->first()->path }}" alt="">
-                                            <div class="product__title">{{ str_limit($product->node->title, 15) }}</div>
-                                            <div class="product__desc">Calatrava 5960 WG Limited Edition</div>
-                                            <div class="product__desc-sec">18-к белое золото</div>
+                                            <img class="img-responsive" src="{{  $product->images->count() ? $product->images->first()->path : '' }}" alt="">
+                                            <?php
+                                                $manufacturer = [
+                                                    1 => isset($product->node->fields->manufacturer_1) ? $product->node->fields->manufacturer_1 : '',
+                                                    2 => isset($product->node->fields->manufacturer_2) ? $product->node->fields->manufacturer_2 : '',
+                                                    3 => isset($product->node->fields->manufacturer_3) ? $product->node->fields->manufacturer_3 : '',
+                                                ];
+                                            ?>
+                                            <div class="product__title">{{ $fields->options['options']['ru'][$manufacturer[$product->category->id]] }}</div>
+                                            <div class="product__desc">{{ str_limit($product->node->title, 25) }}</div>
+                                            @if(isset($product->node->fields->product_material_case))<div class="product__desc-sec">{{ $fields2->options['options']['ru'][$product->node->fields->product_material_case] }}</div>@endif
                                             <?php
                                                 $price = [
                                                     1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
@@ -169,5 +180,22 @@
             if(url == href)
                 $(this).closest('li').addClass('active');
         });
+    </script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: [ 75, 300 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val(ui.values[ 0 ] );
+                    $( "#amount2" ).val(ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ));
+            $( "#amount2" ).val($( "#slider-range" ).slider( "values", 1 ));
+        } );
     </script>
 @endsection

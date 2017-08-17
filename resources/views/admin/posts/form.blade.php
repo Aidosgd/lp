@@ -173,6 +173,17 @@
                                 </div>
                             </div>
                             <div class="line line-dashed b-b line-lg pull-in"></div>
+                            @foreach($root->fields as $field)
+                                @if($field->slug == 'manufacturer_1' || $field->slug == 'manufacturer_2' || $field->slug == 'manufacturer_3')
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="{{ $locale }}_fields_{{ $field->localeTitle }}">{{ $field->localeTitle }}</label>
+                                        <div class="col-sm-10">
+                                            {!! Form::select($locale.'[fields]['.$field->slug.']', $field->localeOptions , null, [ 'class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="{{ $locale }}_slug">{{ trans('content::default.posts.slug') }}</label>
                                 <div class="col-sm-10">
@@ -193,29 +204,8 @@
                                     {!! Form::textarea($locale.'[content]', null, ['class' => 'form-control', 'ui-jq' => 'ckeditor', 'ui-options' => json_encode($ckeditorBasic)]) !!}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="{{ $locale }}_seo_title">{{ trans('content::default.posts.seo_title') }}</label>
-                                <div class="col-sm-10">
-                                    {!! Form::text($locale.'[seo_title]', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="{{ $locale }}_seo_description">{{ trans('content::default.posts.seo_description') }}</label>
-                                <div class="col-sm-10">
-                                    {!! Form::text($locale.'[seo_description]', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label" for="{{ $locale }}_seo_keywords">{{ trans('content::default.posts.seo_keywords') }}</label>
-                                <div class="col-sm-10">
-                                    {!! Form::text($locale.'[seo_keywords]', null, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="line line-dashed b-b line-lg pull-in"></div>
                             @foreach($root->fields as $field)
-                                @if($field->type != 'file')
+                                @if($field->type != 'file' && $field->slug != 'manufacturer_1' && $field->slug != 'manufacturer_2' && $field->slug != 'manufacturer_3')
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="{{ $locale }}_fields_{{ $field->localeTitle }}">{{ $field->localeTitle }}</label>
                                         <div class="col-sm-10">
@@ -265,6 +255,27 @@
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                 @endif
                             @endforeach
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="{{ $locale }}_seo_title">{{ trans('content::default.posts.seo_title') }}</label>
+                                <div class="col-sm-10">
+                                    {!! Form::text($locale.'[seo_title]', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="{{ $locale }}_seo_description">{{ trans('content::default.posts.seo_description') }}</label>
+                                <div class="col-sm-10">
+                                    {!! Form::text($locale.'[seo_description]', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="{{ $locale }}_seo_keywords">{{ trans('content::default.posts.seo_keywords') }}</label>
+                                <div class="col-sm-10">
+                                    {!! Form::text($locale.'[seo_keywords]', null, ['class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
                             @if($terms->count())
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="tags[]">{{ trans('content::default.posts.tags') }}</label>

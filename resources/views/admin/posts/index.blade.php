@@ -94,7 +94,7 @@
           <tr>
               <th><label  class="i-checks m-b-none js-check-checkbox"><input onchange="applyBulkCheck($(this))" type="checkbox"><i></i></label></th>
             <th>{{ trans('content::default.posts.id') }}</th>
-            <th>{{ trans('content::default.posts.title') }}</th>
+            <th>Бренд</th>
             <th>Колекция</th>
             <th>Цена</th>
             <th>{{ trans('social::default.moderation.approved') }}</th>
@@ -114,9 +114,17 @@
                     @elseif($post->images->count())
                         <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images->first()->getPath($post) }}"/>
                     @endif
-                    {{ $post->node->title }}
+
+                    <?php
+                        $manufacturer = [
+                            1 => isset($post->node->fields->manufacturer_1) ? $post->node->fields->manufacturer_1 : '',
+                            2 => isset($post->node->fields->manufacturer_2) ? $post->node->fields->manufacturer_2 : '',
+                            3 => isset($post->node->fields->manufacturer_3) ? $post->node->fields->manufacturer_3 : '',
+                        ];
+                    ?>
+                    {{ $fields->options['options']['ru'][$manufacturer[$post->category->id]] }}
                 </td>
-                <td>{{ strip_tags($post->node->teaser) }}</td>
+                <td>{{ $post->node->title }}</td>
                 <?php
                 $price = [
                     1 => isset($post->node->fields->price_1) ? $post->node->fields->price_1 : '',

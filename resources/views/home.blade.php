@@ -2065,9 +2065,9 @@
                         <div class="product">
                             <a href="/catalog/clocks/{{ $product->node->slug }}">
                                 <img class="img-responsive" src="{{ $product->images->first()->path }}" alt="">
-                                <div class="product__title">{{ str_limit($product->node->title, 15) }}</div>
-                                <div class="product__desc">Calatrava 5960 WG Limited Edition</div>
-                                <div class="product__desc-sec">18-к белое золото</div>
+                                <div class="product__title">{{ $fields->options['options']['ru'][$product->node->fields->manufacturer_1] }}</div>
+                                <div class="product__desc">{{ str_limit($product->node->title, 30) }}</div>
+                                <div class="product__desc-sec">{{ $fields2->options['options']['ru'][$product->node->fields->product_material_case] }}</div>
                                 <?php
                                     $price = isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '';
                                     $price_d = $price / $currencies;

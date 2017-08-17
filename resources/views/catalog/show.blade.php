@@ -23,9 +23,16 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="product-page__title">{{ $product->node->title }}</div>
-                    <div class="product-page__desc">Calatrava 5960 WG Limited Edition</div>
-                    <div class="product-page__desc-sec">18-к белое золото</div>
+                    <?php
+                    $manufacturer = [
+                        1 => isset($product->node->fields->manufacturer_1) ? $product->node->fields->manufacturer_1 : '',
+                        2 => isset($product->node->fields->manufacturer_2) ? $product->node->fields->manufacturer_2 : '',
+                        3 => isset($product->node->fields->manufacturer_3) ? $product->node->fields->manufacturer_3 : '',
+                    ];
+                    ?>
+                    <div class="product-page__title">{{ $fields->options['options']['ru'][$manufacturer[$product->category->id]] }}</div>
+                    <div class="product-page__desc">{{ $product->node->title }}</div>
+                    @if(isset($product->node->fields->product_material_case))<div class="product-page__desc-sec">{{ $fields2->options['options']['ru'][$product->node->fields->product_material_case] }}</div>@endif
                     <?php
                         $price = [
                             1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
