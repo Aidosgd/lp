@@ -7,6 +7,7 @@ use Ibec\Content\Category;
 use Ibec\Content\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use function MongoDB\BSON\toJSON;
 
 class HomeController extends Controller
 {
@@ -159,6 +160,66 @@ class HomeController extends Controller
 
         return view('catalog.index', compact('products', 'category', 'fields', 'fields2',
             'productCondition', 'productSex', 'productType', 'minPrice', 'maxPrice'));
+    }
+
+    public function catalogPost($catalog, Request $request)
+    {
+        dd($request->all());
+        $category = Category::whereHas('nodes', function ($q) use ($catalog){
+            $q->where('slug', $catalog);
+        })->first();
+        $products_post = Post::where('category_id', $category->id)->get();
+
+        $products = new Collection();
+
+        $manufacturer = [
+            1 => 'manufacturer_1',
+            2 => 'manufacturer_2',
+            3 => 'manufacturer_3',
+        ];
+
+        $fields = Field::where('slug', $manufacturer[$category->id])->first();
+        $fields2 = Field::where('slug', 'product_material_case')->first();
+
+        $url = "http://www.nationalbank.kz/rss/get_rates.cfm?fdate=".date("d.m.Y");
+        $xml = simplexml_load_file($url);
+
+        $currencies = [];
+
+        foreach($xml->item as $currency_xml)
+        {
+            $currencies[(string)$currency_xml->title] = $currency_xml;
+        }
+
+        $currencies = $currencies['USD']->description;
+
+        foreach($products_post as $product_post) {
+            $manufacturer = [
+                1 => isset($product_post->node->fields->manufacturer_1) ? $product_post->node->fields->manufacturer_1 : '',
+                2 => isset($product_post->node->fields->manufacturer_2) ? $product_post->node->fields->manufacturer_2 : '',
+                3 => isset($product_post->node->fields->manufacturer_3) ? $product_post->node->fields->manufacturer_3 : '',
+            ];
+
+            $price = [
+                1 => isset($product_post->node->fields->price_1) ? $product_post->node->fields->price_1 : '',
+                2 => isset($product_post->node->fields->price_2) ? $product_post->node->fields->price_2 : '',
+                3 => isset($product_post->node->fields->price_3) ? $product_post->node->fields->price_3 : '',
+            ];
+
+            $price_d = $price[$category->id] / $currencies;
+
+            $products->push([
+                'link' => '/catalog/'.$category->node->slug.'/'.$product_post->node->slug,
+                'img' => $product_post->images[0]->path,
+                'brand' => $fields->options['options']['ru'][$manufacturer[$product_post->category->id]],
+                'title' => str_limit($product_post->node->title, 25),
+                'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
+                'price' => $price[$category->id],
+                'price_d' => number_format($price_d),
+            ]);
+        }
+
+        return response()->json($products);
     }
 
     public function show($catalog, $slug)

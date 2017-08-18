@@ -14,4 +14,5 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::get('/catalog/{catalog}', 'HomeController@catalog');
+Route::post('/catalog/{catalog}', 'HomeController@catalogPost');
 Route::get('/catalog/{catalog}/{slug}', 'HomeController@show');

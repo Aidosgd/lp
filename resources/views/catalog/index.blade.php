@@ -90,7 +90,7 @@
                                         <div class="product__title">@{{ product.brand }}</div>
                                         <div class="product__desc">@{{ product.title }}</div>
                                         <div class="product__desc-sec">@{{ product.product_material_case }}</div>
-                                        <div class="product__price">@{{ product.price }} тг</div>
+                                        <div class="product__price">@{{ product.price | priceFormat }} тг</div>
                                         <div class="product__price-dollar">~ @{{ product.price_d }} $</div>
                                     </a>
                                 </div>
@@ -150,6 +150,10 @@
             $( "#amount2" ).val($( "#slider-range" ).slider( "values", 1 ));
         } );
 
+        Vue.filter('priceFormat', function(value){
+            return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ")
+        });
+
         var app = new Vue({
             el: '#app',
             data: {
@@ -176,13 +180,46 @@
                 checkFilter: function checkFilter(event){
                     var input = event.target,
                         value = $(input).data('value'),
-                        filter = $(input).data('filter');
-                    this.filterData.push([value, filter]);
-                    this.sentRequest();
+                        filter = $(input).data('filter'),
+                        data = [value, filter],
+                        _this = this;
+
+                    Array.prototype.indexOfForArrays = function(search)
+                    {
+                        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
+                        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
+
+                        return arrJson.indexOf(searchJson);
+                    };
+
+                    Array.prototype.remove = function(from, to) {
+                        var rest = this.slice((to || from) + 1 || this.length);
+                        this.length = from < 0 ? this.length + from : from;
+                        return this.push.apply(this, rest);
+                    };
+
+                    var result = this.filterData.indexOfForArrays(data);
+
+                    if(result == -1){
+                        setTimeout(function(){
+                            _this.filterData.push([value, filter]);
+                        _this.sentRequest();
+                        }, 100);
+                    }else{
+                        setTimeout(function(){
+                            _this.filterData.remove(result);
+                        _this.sentRequest();
+                        }, 100);
+                    }
+
                 },
                 sentRequest: function sentRequest(){
                     var category = '{{ $category->node->slug }}';
-                    this.$http.post('/catalog/'+ category, this.filterData).then(function (response) {
+                    this.$http.post('/catalog/'+ category, this.filterData, {
+                        headers: {
+                            'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
+                        }
+                    }).then(function (response) {
                         if (response.status == 200) {
                             console.log(response.data);
                             if(response.data.length == 0) {
