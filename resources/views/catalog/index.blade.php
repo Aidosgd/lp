@@ -15,7 +15,6 @@
             <div class="row">
                 <div class="col-md-3 catalog-sidebar">
                     <h4>Отобрать по</h4>
-                    @{{ filterData }}
                     <div class="checked-label">
                         <label v-for="name in checkedNames">@{{ name }} <i @click="closeLabel(name)" class="fa fa-close"></i></label>
                         <span v-if="checkedNames.length" @click="clearCheckedNames()"><i class="fa fa-refresh"></i> Сбросить все</span>
@@ -221,17 +220,12 @@
                         }
                     }).then(function (response) {
                         if (response.status == 200) {
-                            console.log(response.data);
                             if(response.data.length == 0) {
-                                this.requestIsSended = false;
-                                this.notFoundSpeakers = true;
+
+
                             }
                             else {
-                                this.speakers = response.data;
-                                this.activeSpeaker = this.speakers[0];
-                                this.speakers[0].isActive = true;
-                                this.requestIsSended = false;
-                                this.notFoundSpeakers = false;
+                                this.products = response.data;
                             }
                         }
                     });

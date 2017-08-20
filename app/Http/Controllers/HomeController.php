@@ -164,11 +164,24 @@ class HomeController extends Controller
 
     public function catalogPost($catalog, Request $request)
     {
-        dd($request->all());
+        $filters = $request->all();
+
         $category = Category::whereHas('nodes', function ($q) use ($catalog){
             $q->where('slug', $catalog);
         })->first();
-        $products_post = Post::where('category_id', $category->id)->get();
+
+        $products_post = Post::query();
+
+        $products_post->where('category_id', $category->id);
+
+        foreach ($filters as $filter){
+            $products_post->whereHas('nodes', function($q) use ($filter){
+                $q->where('fields->'.$filter[1], (string)$filter[0]);
+            });
+        }
+
+        $products_post = $products_post->get();
+
 
         $products = new Collection();
 
