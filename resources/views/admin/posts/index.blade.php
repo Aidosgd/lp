@@ -122,7 +122,7 @@
                             3 => isset($post->node->fields->manufacturer_3) ? $post->node->fields->manufacturer_3 : '',
                         ];
                     ?>
-                    {{ $fields->options['options']['ru'][$manufacturer[$post->category->id]] }}
+                    {{ count($fields) ? $fields->options['options']['ru'][$manufacturer[$post->category->id]] : '' }}
                 </td>
                 <td>{{ $post->node->title }}</td>
                 <?php
@@ -132,7 +132,7 @@
                     3 => isset($post->node->fields->price_3) ? $post->node->fields->price_3 : '',
                 ];
                 ?>
-                <td>{{ $price[$post->category->id] }}</td>
+                <td>{{ $post->category->id != 6 ? $price[$post->category->id] : '' }}</td>
                 <td>
                   <label class="i-switch bg-info m-t-xs m-r">
                     <input type="checkbox" ng-model="approval.post_{{ $post->id }}" ng-change="approve({{ $post->id }})">

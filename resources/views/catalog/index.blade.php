@@ -23,7 +23,10 @@
                         <h4>Состояние</h4>
                         <div class="checkbox-filter radio-checkbox">
                             <div v-for="(condition, index) in productCondition" v-cloak>
-                                <input @click="checkFilter($event)" :data-value="index" data-filter="product_condition" v-bind:id="'condition' + index" type="checkbox" name="check" v-model="checkedNames" v-bind:value="condition.title">
+                                <input @click="checkFilter($event)"
+                                :data-value="index" data-filter="product_condition"
+                                v-bind:id="'condition' + index" type="checkbox" name="check"
+                                v-model="filterData.product_condition" v-bind:value="index">
                                 <label v-bind:for="'condition' + index">@{{ condition.title }}</label>
                             </div>
                         </div>
@@ -36,7 +39,9 @@
                         <h4>Кому</h4>
                         <div class="checkbox-filter radio-checkbox">
                             <div v-for="(sex, index) in productSex" v-cloak>
-                                <input @click="checkFilter($event)" :data-value="index" data-filter="product_sex" v-bind:id="'sex' + index" type="checkbox" name="check" v-model="checkedNames" v-bind:value="sex.title">
+                                <input @click="checkFilter($event)" :data-value="index"
+                                data-filter="" v-bind:id="'sex' + index" type="checkbox"
+                                name="check" v-model="filterData.product_sex" v-bind:value="index">
                                 <label v-bind:for="'sex' + index">@{{ sex.title }}</label>
                             </div>
                         </div>
@@ -54,7 +59,9 @@
                         <div class="checkbox-filter radio-checkbox">
                             <div class="checkbox-filter radio-checkbox">
                                 <div v-for="(type, index) in productType" v-cloak>
-                                    <input @click="checkFilter($event)" :data-value="index" data-filter="product_type" v-bind:id="'type' + index" type="checkbox" name="check" v-model="checkedNames" v-bind:value="type.title">
+                                    <input @click="checkFilter($event)" :data-value="index"
+                                    data-filter="product_type" v-bind:id="'type' + index" type="checkbox"
+                                    name="check" v-model="filterData.product_type" v-bind:value="index">
                                     <label v-bind:for="'type' + index">@{{ type.title }}</label>
                                 </div>
                             </div>
@@ -161,7 +168,11 @@
                 productSex: {!! isset($productSex) ? $productSex : '""' !!},
                 productType: {!! isset($productType) ? $productType : '""' !!},
                 checkedNames: [],
-                filterData: []
+                filterData: {
+                    product_sex: [],
+                    product_condition: [],
+                    product_type: [],
+                },
             },
 
             methods: {
@@ -182,34 +193,37 @@
                         filter = $(input).data('filter'),
                         data = [value, filter],
                         _this = this;
-
-                    Array.prototype.indexOfForArrays = function(search)
-                    {
-                        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
-                        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
-
-                        return arrJson.indexOf(searchJson);
-                    };
-
-                    Array.prototype.remove = function(from, to) {
-                        var rest = this.slice((to || from) + 1 || this.length);
-                        this.length = from < 0 ? this.length + from : from;
-                        return this.push.apply(this, rest);
-                    };
-
-                    var result = this.filterData.indexOfForArrays(data);
-
-                    if(result == -1){
-                        setTimeout(function(){
-                            _this.filterData.push([value, filter]);
+//
+//                    Array.prototype.indexOfForArrays = function(search)
+//                    {
+//                        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
+//                        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
+//
+//                        return arrJson.indexOf(searchJson);
+//                    };
+//
+//                    Array.prototype.remove = function(from, to) {
+//                        var rest = this.slice((to || from) + 1 || this.length);
+//                        this.length = from < 0 ? this.length + from : from;
+//                        return this.push.apply(this, rest);
+//                    };
+//
+//                    var result = this.filterData.indexOfForArrays(data);
+//
+//                    if(result == -1){
+//                        setTimeout(function(){
+////                            _this.filterData.push([value, filter]);
+//                        _this.sentRequest();
+//                        }, 100);
+//                    }else{
+//                        setTimeout(function(){
+////                            _this.filterData.remove(result);
+//                        _this.sentRequest();
+//                        }, 100);
+//                    }
+                    setTimeout(function () {
                         _this.sentRequest();
-                        }, 100);
-                    }else{
-                        setTimeout(function(){
-                            _this.filterData.remove(result);
-                        _this.sentRequest();
-                        }, 100);
-                    }
+                    }, 100);
 
                 },
                 sentRequest: function sentRequest(){

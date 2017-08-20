@@ -122,12 +122,16 @@ class PostsController extends Controller {
 		}
 
 		$posts = $posts->orderBy('display_date', 'desc')->latest()->paginate(config('admin.pagination'))->appends($appends);
-        $manufacturer = [
-            1 => 'manufacturer_1',
-            2 => 'manufacturer_2',
-            3 => 'manufacturer_3',
-        ];
-		$fields = Field::where('slug', $manufacturer[$root->id])->first();
+		if($root->id != 6){
+			$manufacturer = [
+				1 => 'manufacturer_1',
+				2 => 'manufacturer_2',
+				3 => 'manufacturer_3',
+			];
+			$fields = Field::where('slug', $manufacturer[$root->id])->first();
+		}else{
+			$fields = [];
+		}
 
 		return view('admin.posts.index', [
 			'posts' => $posts,

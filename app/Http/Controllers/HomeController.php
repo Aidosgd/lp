@@ -174,13 +174,40 @@ class HomeController extends Controller
 
         $products_post->where('category_id', $category->id);
 
-        foreach ($filters as $filter){
-            $products_post->whereHas('nodes', function($q) use ($filter){
-                $q->where('fields->'.$filter[1], (string)$filter[0]);
+        if($filters['product_condition']){
+            $products_post->whereHas('nodes', function($q) use ($filters){
+                if (count($filters['product_condition']) == 1){
+                    $q->where('fields->product_condition', (string)$filters['product_condition'][0]);
+                }else{
+                    $q->whereIn('fields->product_condition', $filters['product_condition']);
+                }
+
+            });
+        }
+        if($filters['product_sex']){
+            $products_post->whereHas('nodes', function($q) use ($filters){
+                if (count($filters['product_sex']) == 1){
+                    $q->where('fields->product_sex', (string)$filters['product_sex'][0]);
+                }else{
+                    $q->whereIn('fields->product_sex', $filters['product_sex']);
+                }
+
+            });
+        }
+        if($filters['product_type']){
+            $products_post->whereHas('nodes', function($q) use ($filters){
+                if (count($filters['product_type']) == 1){
+                    $q->where('fields->product_type', (string)$filters['product_type'][0]);
+                }else{
+                    $q->whereIn('fields->product_type', $filters['product_type']);
+                }
+
             });
         }
 
         $products_post = $products_post->get();
+
+//        dd($products_post->count());
 
 
         $products = new Collection();
