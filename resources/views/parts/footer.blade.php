@@ -4,7 +4,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2">
-                        logo
+                        <a href="/">
+                            <img src="/images/logo.png" style="width: 90%;padding-top: 20px;" alt="">
+                        </a>
                     </div>
                     <div class="col-md-5">
                         <h4>Страницы</h4>

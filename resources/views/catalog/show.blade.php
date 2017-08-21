@@ -41,8 +41,8 @@
                         ];
                         $price_d = $price[$category->id] / $currencies;
                     ?>
-                    <div class="product__price">{{ $price[$category->id] }} тг</div>
-                    <div class="product-page__price-dollar">~ {{ number_format($price_d) }} $</div>
+                    <div class="product__price">{{ number_format($price[$category->id], 0, ' ', ' ') }} тг</div>
+                    <div class="product-page__price-dollar">~ {{ number_format($price_d, 2, ',', ' ') }} $</div>
                     <button class="btn btn-default">Заказать</button>
                 </div>
                 <div class="col-md-4">

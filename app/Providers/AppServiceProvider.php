@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Ibec\Menu\Menu;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Factory;
 

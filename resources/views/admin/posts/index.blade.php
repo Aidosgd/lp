@@ -94,9 +94,15 @@
           <tr>
               <th><label  class="i-checks m-b-none js-check-checkbox"><input onchange="applyBulkCheck($(this))" type="checkbox"><i></i></label></th>
             <th>{{ trans('content::default.posts.id') }}</th>
-            <th>Бренд</th>
-            <th>Колекция</th>
-            <th>Цена</th>
+              @if($root->id != 6)
+                  <th>Бренд</th>
+                  <th>Колекция</th>
+                  <th>Цена</th>
+              @else
+                  <th>{{ trans('content::default.posts.title') }}</th>
+                  <th>{{ trans('content::default.posts.category') }}</th>
+                  <th>{{ trans('content::default.posts.user') }}</th>
+              @endif
             <th>{{ trans('social::default.moderation.approved') }}</th>
             <th>{{ trans('admin::default.actions.label') }}</th>
             <th>{{ trans('admin::default.dates') }}</th>
@@ -107,32 +113,47 @@
             <tr ng-init="approval.post_{{ $post->id }} = {{ $post->status == 1 ? 'true' : 'false' }}">
                 <td class="v-middle" style="width:20px;"><label class="i-checks m-b-none js-check-checkbox active"><input type="checkbox" data-value="{{$post->id}}"><i></i></label></td>
                 <td>{{ $post->id }}</td>
-                <td>
-                    <?php $cropped_image = $post->images->count() ? $post->images()->withPivot('cropped_coords')->first() : 'null' ;?>
-                    @if(isset($cropped_image) && isset($cropped_image->pivot->cropped_coords))
-                        <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images()->first()->getPath($post, 'small') }}"/>
-                    @elseif($post->images->count())
-                        <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images->first()->getPath($post) }}"/>
-                    @endif
+                @if($root->id != 6)
+                    <td>
+                        <?php $cropped_image = $post->images->count() ? $post->images()->withPivot('cropped_coords')->first() : 'null' ;?>
+                        @if(isset($cropped_image) && isset($cropped_image->pivot->cropped_coords))
+                            <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images()->first()->getPath($post, 'small') }}"/>
+                        @elseif($post->images->count())
+                            <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images->first()->getPath($post) }}"/>
+                        @endif
 
-                    <?php
+                        <?php
                         $manufacturer = [
                             1 => isset($post->node->fields->manufacturer_1) ? $post->node->fields->manufacturer_1 : '',
                             2 => isset($post->node->fields->manufacturer_2) ? $post->node->fields->manufacturer_2 : '',
                             3 => isset($post->node->fields->manufacturer_3) ? $post->node->fields->manufacturer_3 : '',
                         ];
+                        ?>
+                        {{ count($fields) ? $fields->options['options']['ru'][$manufacturer[$post->category->id]] : '' }}
+                    </td>
+                    <td>{{ $post->node->title }}</td>
+                    <?php
+                    $price = [
+                        1 => isset($post->node->fields->price_1) ? $post->node->fields->price_1 : '',
+                        2 => isset($post->node->fields->price_2) ? $post->node->fields->price_2 : '',
+                        3 => isset($post->node->fields->price_3) ? $post->node->fields->price_3 : '',
+                    ];
                     ?>
-                    {{ count($fields) ? $fields->options['options']['ru'][$manufacturer[$post->category->id]] : '' }}
-                </td>
-                <td>{{ $post->node->title }}</td>
-                <?php
-                $price = [
-                    1 => isset($post->node->fields->price_1) ? $post->node->fields->price_1 : '',
-                    2 => isset($post->node->fields->price_2) ? $post->node->fields->price_2 : '',
-                    3 => isset($post->node->fields->price_3) ? $post->node->fields->price_3 : '',
-                ];
-                ?>
-                <td>{{ $post->category->id != 6 ? $price[$post->category->id] : '' }}</td>
+                    <td>{{ $post->category->id != 6 ? $price[$post->category->id] : '' }}</td>
+                @else
+                    <td>
+                        <?php $cropped_image = $post->images->count() ? $post->images()->withPivot('cropped_coords')->first() : 'null' ;?>
+                        @if(isset($cropped_image) && isset($cropped_image->pivot->cropped_coords))
+                            <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images()->first()->getPath($post, 'small') }}"/>
+                        @elseif($post->images->count())
+                            <img style="width:75px;float:left;margin-right:10px;" src="{{ $post->images->first()->getPath($post) }}"/>
+                        @endif
+                        {{ $post->node->title }}
+                    </td>
+                    <td>{{ $post->category->node->title }}</td>
+                    <td>{{ $post->author->name }}</td>
+                @endif
+
                 <td>
                   <label class="i-switch bg-info m-t-xs m-r">
                     <input type="checkbox" ng-model="approval.post_{{ $post->id }}" ng-change="approve({{ $post->id }})">

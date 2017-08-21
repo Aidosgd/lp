@@ -11163,6 +11163,10 @@ header .navbar .collapse .nav.navbar-right a span {
   padding-bottom: 5px;
 }
 
+footer {
+  background: white;
+}
+
 footer .container .footer-body {
   border-top: 1px solid #f2f4f5;
 }
@@ -11485,6 +11489,71 @@ footer .container .footer-body .subs {
   font-style: normal;
   color: black;
   float: right;
+}
+
+.pages .pages-menu {
+  list-style: none;
+  position: relative;
+}
+
+.pages .pages-menu:before {
+  content: '';
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 1px;
+  top: -20px;
+  background: #b4b4b6;
+}
+
+.pages .pages-menu li {
+  padding-bottom: 15px;
+}
+
+.pages .pages-menu li a {
+  font-size: 25px;
+  color: #415c6b;
+}
+
+.pages .pages-menu li ul.children {
+  list-style: none;
+  padding: 0;
+}
+
+.pages .pages-menu li ul.children li {
+  padding-bottom: 5px;
+}
+
+.pages .pages-menu li ul.children li a {
+  font-size: 16px;
+  color: #4a4c4d;
+  font-weight: 100;
+}
+
+.pages h1 {
+  text-align: center;
+}
+
+.contacts {
+  padding-bottom: 100px;
+}
+
+.contacts__svg {
+  position: relative;
+}
+
+.contacts__svg .text {
+  position: absolute;
+  left: 0;
+  top: 70px;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+}
+
+.contacts #map {
+  padding: 10px;
+  border: 1px solid rgba(115, 126, 135, 0.51);
 }
 
 /*# sourceMappingURL=app.css.map */

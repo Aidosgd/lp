@@ -10,16 +10,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Перспектива <span>часовой ломбард</span></a>
+                    {{--<a class="navbar-brand" href="/">Перспектива <span>часовой ломбард</span></a>--}}
+                    <a class="navbar-brand" href="/"><img src="/images/logo.png" style="width: 90%" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="/catalog/clocks">Каталог</a></li>
-                        <li><a href="#">Услуги</a></li>
-                        <li><a href="#">О ломбарде</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="/pages">Услуги</a></li>
+                        <li><a href="/pages/about-lombard">О ломбарде</a></li>
+                        <li><a href="/contacts">Контакты</a></li>
                         <!--<li class="dropdown">-->
                         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
                         <!--<ul class="dropdown-menu">-->
