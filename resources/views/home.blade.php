@@ -16,7 +16,7 @@
                                 Мы работаем достаточно продолжительное время и <br>
                                 создали себе безупречную репутацию. "Перспектива" <br>
                                 пользуется заслуженным авторитетом и <br>
-                                <a>Подробнее</a>
+                                <a href="/pages/about-lombard">Подробнее</a>
                             </p>
                         </div>
                         <div class="col-md-7 main-nav__right">
@@ -25,6 +25,7 @@
                                     <a href="/catalog/clocks">
                                         Швейцарские часы
                                         <div class="main-nav__svg--first">
+                                            <img class="hover-img" src="/images/rolex_oyster_perpetual_31mm.jpg__760x0_q75_crop-scale_subsampling-2_upscale-false.png" alt="">
                                             <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                  viewBox="0 0 405 396" style="enable-background:new 0 0 405 396;" xml:space="preserve">
                       <style type="text/css">
@@ -267,6 +268,7 @@
                                     <a href="/catalog/jewelries">
                                         Ювелирные украшения
                                         <div class="main-nav__svg--second">
+                                            <img class="hover-img" src="/images/581C82D9.jpg" alt="">
                                             <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                  viewBox="0 0 408 319.5" style="enable-background:new 0 0 408 319.5;" xml:space="preserve">
                       <style type="text/css">
@@ -434,6 +436,7 @@
                                     <a href="/catalog/accessories">
                                         Аксессуары
                                         <div class="main-nav__svg--third">
+                                            <img class="hover-img" src="/images/dc3a2697fcd17440378faf6032935409.png" alt="">
                                             <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                  viewBox="0 0 409.5 441" style="enable-background:new 0 0 409.5 441;" xml:space="preserve">
                       <style type="text/css">
@@ -754,7 +757,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-4 main-services__item">
-                            <a href="">
+                            <a href="/pages/pledge">
                                 <div class="main-services__svg">
                                     <svg version="1.1" id="Слой_1"
                                          xmlns="http://www.w3.org/2000/svg"
@@ -1183,12 +1186,15 @@
                                 </div>
                                 <div class="main-services__icon main-services__icon--first">
                                     <img src="/images/4c884d50b8.png" alt="">
+                                    <div class="text_hover">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    </div>
                                 </div>
                                 <div class="btn btn-default">Залог</div>
                             </a>
                         </div>
                         <div class="col-md-4 main-services__item">
-                            <a href="">
+                            <a href="/pages/purchase">
                                 <div class="main-services__svg">
                                     <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          viewBox="0 0 521 305" style="enable-background:new 0 0 521 305;" xml:space="preserve">
@@ -1615,12 +1621,15 @@
                                 </div>
                                 <div class="main-services__icon main-services__icon--first">
                                     <img src="/images/6c037e15af.png" alt="">
+                                    <div class="text_hover">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    </div>
                                 </div>
                                 <div class="btn btn-default">Скупка</div>
                             </a>
                         </div>
                         <div class="col-md-4 main-services__item">
-                            <a href="">
+                            <a href="/pages/valuation">
                                 <div class="main-services__svg">
                                     <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                          viewBox="0 0 521 305" style="enable-background:new 0 0 521 305;" xml:space="preserve">
@@ -2047,6 +2056,9 @@
                                 </div>
                                 <div class="main-services__icon main-services__icon--first">
                                     <img src="/images/7f267b3163.png" alt="">
+                                    <div class="text_hover">
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                    </div>
                                 </div>
                                 <div class="btn btn-default">Оценка</div>
                             </a>

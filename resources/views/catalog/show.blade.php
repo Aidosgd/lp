@@ -47,8 +47,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="company-desc">
-                        <img class="img-responsive" src="/images/4c884d50b8.png" alt="">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur aut eveniet itaque quis tenetur, voluptate. Ab commodi debitis earum eius explicabo sed unde voluptatem. Ab laboriosam minima odio reprehenderit sint?</p>
+                        {!! $product->node->content !!}
                     </div>
                 </div>
             </div>
@@ -56,28 +55,31 @@
             <div class="row product-descriptions">
                 <div class="col-md-6">
                     <ul>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
+                        <li><span>Бренд:</span> <span class="right">{{ $fields->options['options']['ru'][$manufacturer[$product->category->id]] }}</span></li>
+                        <li><span>Коллекция:</span> <span class="right">{{ $product->node->title }}</span></li>
+                        @if($category->id == 1)<li><span>Кому:</span> <span class="right">{{ $fields3->options['options']['ru'][$product->node->fields->product_sex] }}</span></li>@endif
+                        <?php
+                            $type = [
+                                    1 => isset($product->node->fields->product_type) ? $product->node->fields->product_type : '',
+                                    2 => isset($product->node->fields->product_type_2) ? $product->node->fields->product_type_2 : '',
+                            ];
+                        ?>
+                        @if($category->id != 3)<li><span>Тип:</span> <span class="right">{{ $fields4->options['options']['ru'][$type[$product->category->id]] }}</span></li>@endif
+                        @if($category->id == 1)<li><span>Материал корпуса:</span> <span class="right">{{ $fields2->options['options']['ru'][$product->node->fields->product_material_case] }}</span></li>@endif
+                        @if($category->id == 1)<li><span>Водопроницаемость:</span> <span class="right">{{ $product->node->fields->watertightness }}</span></li>@endif
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <ul>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
-                        <li><span>test:</span> <span class="right">brand</span></li>
+                        @if($category->id == 1)<li><span>Диаметр корпуса:</span> <span class="right">{{ $product->node->fields->case_diameter }}</span></li>
+                        <li><span>Комплектация:</span> <span class="right">{{ $product->node->fields->equipment }}</span></li>
+                        <li><span>Цвет циферблата:</span> <span class="right">{{ $product->node->fields->dial_color }}</span></li>
+{{--                        <li><span>Тип механизма:</span> <span class="right">{{ $product->node->fields->product_condition }}</span></li>--}}
+{{--                        <li><span>Запас хода:</span> <span class="right">{{ $product->node->fields->product_condition }}</span></li>--}}
+{{--                        <li><span>Калибр:</span> <span class="right">{{ $product->node->fields->product_condition }}</span></li>--}}
+                        <li><span>Состояние:</span> <span class="right">{{ $fields5->options['options']['ru'][$product->node->fields->product_condition] }}</span></li>
+                        <li><span>Материал ремешка:</span> <span class="right">{{ $fields6->options['options']['ru'][$product->node->fields->strap_material] }}</span></li>
+                        <li><span>Функции:</span> <span class="right">{{ $product->node->fields->function }}</span></li>@endif
                     </ul>
                 </div>
             </div>

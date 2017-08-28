@@ -26,12 +26,24 @@
                                 <input @click="checkFilter($event)"
                                 :data-value="index" data-filter="product_condition"
                                 v-bind:id="'condition' + index" type="checkbox" name="check"
-                                v-model="filterData.product_condition" v-bind:value="index">
+                                v-model="checkedNames" v-bind:value="condition.title">
                                 <label v-bind:for="'condition' + index">@{{ condition.title }}</label>
                             </div>
                         </div>
                     </div>
                     <h4>Бренд</h4>
+                    <div v-if="productBrand.length">
+                        <h4>Состояние</h4>
+                        <div class="checkbox-filter radio-checkbox">
+                            <div v-for="(brand, index) in productBrand" v-cloak>
+                                <input @click="checkFilter($event)"
+                                :data-value="index" data-filter="product_brand"
+                                v-bind:id="'brand' + index" type="checkbox" name="check"
+                                v-model="checkedNames" v-bind:value="brand.title">
+                                <label v-bind:for="'brand' + index">@{{ brand.title }}</label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal-filter">
                         <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Выбрать бренд</button>
                     </div>
@@ -40,8 +52,8 @@
                         <div class="checkbox-filter radio-checkbox">
                             <div v-for="(sex, index) in productSex" v-cloak>
                                 <input @click="checkFilter($event)" :data-value="index"
-                                data-filter="" v-bind:id="'sex' + index" type="checkbox"
-                                name="check" v-model="filterData.product_sex" v-bind:value="index">
+                                data-filter="product_sex" v-bind:id="'sex' + index" type="checkbox"
+                                name="check" v-model="checkedNames" v-bind:value="sex.title">
                                 <label v-bind:for="'sex' + index">@{{ sex.title }}</label>
                             </div>
                         </div>
@@ -61,7 +73,7 @@
                                 <div v-for="(type, index) in productType" v-cloak>
                                     <input @click="checkFilter($event)" :data-value="index"
                                     data-filter="product_type" v-bind:id="'type' + index" type="checkbox"
-                                    name="check" v-model="filterData.product_type" v-bind:value="index">
+                                    name="check" v-model="checkedNames" v-bind:value="type.title">
                                     <label v-bind:for="'type' + index">@{{ type.title }}</label>
                                 </div>
                             </div>
@@ -78,9 +90,10 @@
                             </ul>
                         </div>
                         <div class="pull-right sort-by">
-                            <select name="" id="">
-                                <option value="">По новизне</option>
-                                <option value="">По новизне2</option>
+                            <select name="sortBy" id="">
+                                <option value="0">По новизне</option>
+                                <option value="1">по возрастанию цены</option>
+                                <option value="2">по убыванию цены</option>
                             </select>
                         </div>
                     </div>
@@ -102,9 +115,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row hidden">
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -114,16 +124,17 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+            <div v-if="productBrand.length">
+                <h4>Состояние</h4>
+                <div class="checkbox-filter radio-checkbox">
+                    <div v-for="(brand, index) in productBrand" v-cloak>
+                        <input @click="checkFilter($event)"
+                        :data-value="index" data-filter="product_brand"
+                        v-bind:id="'brand' + index" type="checkbox" name="check"
+                        v-model="checkedNames" v-bind:value="brand.title">
+                        <label v-bind:for="'brand' + index">@{{ brand.title }}</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -164,10 +175,14 @@
             el: '#app',
             data: {
                 products: {!! $products !!},
-                productCondition: {!! $productCondition !!},
+                productsAll: {!! $products !!},
+                productsDeleted: {},
+                productBrand: {!! isset($productBrand) ? $productBrand : '""' !!},
+                productCondition: {!! isset($productCondition) ? $productCondition : '""' !!},
                 productSex: {!! isset($productSex) ? $productSex : '""' !!},
                 productType: {!! isset($productType) ? $productType : '""' !!},
                 checkedNames: [],
+                count: 0,
                 filterData: {
                     product_sex: [],
                     product_condition: [],
@@ -178,6 +193,7 @@
             methods: {
                 clearCheckedNames: function clearCheckedNames(){
                     this.checkedNames = []
+                    this.products = this.productsAll;
                 },
                 closeLabel: function closeLabel(name){
                     var found = this.checkedNames.indexOf(name);
@@ -186,6 +202,8 @@
                         this.checkedNames.splice(found, 1);
                         found = this.checkedNames.indexOf(name);
                     }
+
+                    this.products = this.productsAll;
                 },
                 checkFilter: function checkFilter(event){
                     var input = event.target,
@@ -193,23 +211,31 @@
                         filter = $(input).data('filter'),
                         data = [value, filter],
                         _this = this;
-//
-//                    Array.prototype.indexOfForArrays = function(search)
-//                    {
-//                        var searchJson = JSON.stringify(search); // "[3,566,23,79]"
-//                        var arrJson = this.map(JSON.stringify); // ["[2,6,89,45]", "[3,566,23,79]", "[434,677,9,23]"]
-//
-//                        return arrJson.indexOf(searchJson);
-//                    };
-//
-//                    Array.prototype.remove = function(from, to) {
-//                        var rest = this.slice((to || from) + 1 || this.length);
-//                        this.length = from < 0 ? this.length + from : from;
-//                        return this.push.apply(this, rest);
-//                    };
-//
-//                    var result = this.filterData.indexOfForArrays(data);
-//
+
+                    setTimeout(function () {
+                        if(_this.count >= 0 && _this.count > _this.checkedNames.length){
+                            _this.products = _this.productsAll;
+                        }else{
+                            _this.products = _this.products.filter(function(item) {
+                                if(filter == 'product_condition'){
+                                    return item.product_condition != value ? item.show = false: item.show = true;
+                                }else if(filter == 'product_sex'){
+                                    return item.product_sex != value ? item.show = false: item.show = true;
+                                }else if(filter == 'product_type'){
+                                    return item.product_type != value ? item.show = false: item.show = true;
+                                }else if(filter == 'product_brand'){
+                                    return item.product_brand != value ? item.show = false: item.show = true;
+                                }
+                            });
+                        }
+
+                    }, 100);
+
+                    this.count = this.checkedNames.length;
+
+//                    var result = this.products.indexOfForArrays(data);
+//                    console.log(result);
+
 //                    if(result == -1){
 //                        setTimeout(function(){
 ////                            _this.filterData.push([value, filter]);
@@ -221,9 +247,9 @@
 //                        _this.sentRequest();
 //                        }, 100);
 //                    }
-                    setTimeout(function () {
-                        _this.sentRequest();
-                    }, 100);
+//                    setTimeout(function () {
+//                        _this.sentRequest();
+//                    }, 100);
 
                 },
                 sentRequest: function sentRequest(){

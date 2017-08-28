@@ -431,13 +431,27 @@
                     </svg>
                     <div class="text">
                         +7 (700) 090-90-67 <br>
-                        г. Алма-Атаб ул. Гоголяб 111/87 <br>
+                        г. Алма-Ата ул. Гоголя 111/87 <br>
                         Пн-Пт: 10:00 - 19:00
+                    </div>
+                </div>
+                
+                <div class="slider">
+                    <div class="slide">
+                        <img class="img-responsive" src="/images/dbd9bd14677b4c525359ad3e8a29bf48almaty.jpg">
+                    </div>
+
+                    <div class="slide">
+                        <img class="img-responsive" src="/images/498a96a1136d05ca9fe78b26a7f65484IMG-20160311-WA0015.jpg">
+                    </div>
+
+                    <div class="slide">
+                        <img class="img-responsive" src="/images/498a96a1136d05ca9fe78b26a7f65484IMG-20160311-WA0017.jpg">
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
-                <div id="map" style="width: 100%; height: 600px"></div>
+                <div id="map" style="width: 100%; height: 336px"></div>
             </div>
         </div>
     </div>
@@ -446,6 +460,7 @@
 @section('scripts')
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script>
+        $('.slider').bxSlider();
         ymaps.ready(init);
 
         function init() {

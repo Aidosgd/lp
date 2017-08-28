@@ -11,12 +11,13 @@
                     <div class="col-md-5">
                         <h4>Страницы</h4>
                         <ul>
-                            <li><a href="#">Выкоп часов</a></li>
-                            <li><a href="#">Выкоп часов</a></li>
-                            <li><a href="#">Выкоп часов</a></li>
-                            <li><a href="#">Выкоп часов</a></li>
-                            <li><a href="#">Выкоп часов</a></li>
-                            <li><a href="#">Выкоп часов</a></li>
+                            <li><a href="/catalog/clocks">Каталог</a></li>
+                            <li><a href="/pages/pledge">Залог</a></li>
+                            <li><a href="/pages/purchase">Скупка</a></li>
+                            <li><a href="/pages/valuation">Оценка</a></li>
+                            <li><a href="/pages/about-lombard">О ломбарде</a></li>
+                            <li><a href="/pages/sale-clocks">Продать часы</a></li>
+                            <li><a href="/contacts">Контакты</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2 soc">

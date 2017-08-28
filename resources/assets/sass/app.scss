@@ -145,17 +145,60 @@ header{
     &--first{
       margin-top: 0px;
       width: 154px;
+      &:hover{
+        .hover-img{
+          transition: 0.4s;
+          opacity: 1;
+        }
+      }
+      .hover-img{
+        position: absolute;
+        left: 16px;
+        right: 0;
+        top: 16px;
+        bottom: 0;
+        width: 150px;
+        opacity: 0;
+      }
     }
     &--second{
       padding-top: 15px;
+      &:hover{
+        .hover-img{
+          transition: 0.4s;
+          opacity: 1;
+        }
+      }
+      .hover-img{
+        position: absolute;
+        left: 48px;
+        top: 45px;
+        width: 110px;
+        opacity: 0;
+        transform: rotateX(180deg);
+      }
     }
     &--third{
       margin-top: -30px;
       position: relative;
       top: 20px;
+      &:hover{
+        .hover-img{
+          transition: 0.4s;
+          opacity: 1;
+        }
+      }
+      .hover-img{
+        position: absolute;
+        left: 37px;
+        top: 27px;
+        width: 100px;
+        opacity: 0;
+      }
     }
   }
 }
+
 .main-services{
   &-body{
     border-bottom: 2px solid #b6b6b6;
@@ -178,8 +221,19 @@ header{
     position: absolute;
     top: 50%;
     left: 50%;
+    &:hover{
+      .text_hover{
+        display: block;
+      }
+      img{
+        display: none;
+      }
+    }
     &--first{
       transform: translateX(-50%)translateY(-90%);
+    }
+    .text_hover{
+      display: none;
     }
   }
   &__svg{
@@ -195,6 +249,7 @@ header{
     }
   }
 }
+
 .main-products{
   padding: 30px;
   .container-fluid{
@@ -233,6 +288,7 @@ header{
       color: #393a3c;
       font-size: 18px;
       padding-top: 7px;
+      font-weight: bold;
     }
     &__price-dollar{
       color: #393a3c;
@@ -598,5 +654,17 @@ footer{
   #map{
     padding: 10px;
     border: 1px solid rgba(115, 126, 135, 0.51);
+  }
+  .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto{
+    bottom: 10px;
+  }
+  .slider{
+    border: 1px solid rgba(115, 126, 135, 0.51);
+    .slide{
+      img{
+        max-height: 128px;
+        margin: auto;
+      }
+    }
   }
 }
