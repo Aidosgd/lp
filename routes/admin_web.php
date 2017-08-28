@@ -1,5 +1,9 @@
 <?php
 
+Route::model('callbacks', \App\Callback::class);
+Route::resource('callbacks', 'Admin\CallbacksController', ['as' => config('admin.uri')]);
+Route::model('orders', \App\Order::class);
+Route::resource('orders', 'Admin\OrdersController', ['as' => config('admin.uri')]);
 
 $router->group([
 ], function($router)

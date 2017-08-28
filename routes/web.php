@@ -19,3 +19,6 @@ Route::get('/catalog/{catalog}/{slug}', 'HomeController@show');
 
 Route::get('pages/{slug?}', 'PagesController@show');
 Route::get('contacts', 'PagesController@contacts');
+
+Route::post('callbacks', 'MailController@callbacks');
+Route::post('orders', 'MailController@orders');

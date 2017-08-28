@@ -15,7 +15,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'My Application',
+    'name' => 'Перспектива',
 
     /*
     |--------------------------------------------------------------------------
@@ -183,6 +183,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        \App\Providers\AdminMenuServiceProvider::class,
+        \App\Providers\AdminRolesServiceProvider::class,
 
     ],
 

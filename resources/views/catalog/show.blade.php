@@ -43,7 +43,7 @@
                     ?>
                     <div class="product__price">{{ number_format($price[$category->id], 0, ' ', ' ') }} тг</div>
                     <div class="product-page__price-dollar">~ {{ number_format($price_d, 2, ',', ' ') }} $</div>
-                    <button class="btn btn-default">Заказать</button>
+                    <button data-toggle="modal" data-target="#orders" class="btn btn-default">Заказать</button>
                 </div>
                 <div class="col-md-4">
                     <div class="company-desc">
@@ -83,6 +83,33 @@
                     </ul>
                 </div>
             </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="orders" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="/orders" method="post">
+                        <h2>Заказать товар</h2>
+                        <div class="form-group">
+                            <label>Имя</label>
+                            <input type="text" name="name" class="form-control" placeholder="Имя">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Телефон</label>
+                            <input type="text" name="phone" class="form-control" placeholder="Телефон">
+                        </div>
+
+                        <input type="hidden" name="post_id" value="{{ $product->id }}">
+
+                        <button type="submit" class="btn btn-default">Отправить</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
 @endsection

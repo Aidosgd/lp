@@ -48,7 +48,7 @@
                     <!--<button type="submit" class="btn btn-default">Submit</button>-->
                     <!--</form>-->
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">+7 707 777 77 77 <i class="fa fa-whatsapp" style="padding: 0 5px;"></i><i class="fa fa-telegram"></i><span>Перезвоните мне <i class="fa fa-phone"></i></span></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#myModal">+7 707 777 77 77 <i class="fa fa-whatsapp" style="padding: 0 5px;"></i><i class="fa fa-telegram"></i><span>Перезвоните мне <i class="fa fa-phone"></i></span></a></li>
                         <!--<li class="dropdown">-->
                         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
                         <!--<ul class="dropdown-menu">-->
@@ -65,3 +65,28 @@
         </nav>
     </div>
 </header>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="/callbacks" method="post">
+                    <h2>Заказать звонок</h2>
+                    <div class="form-group">
+                        <label>Имя</label>
+                        <input type="text" name="name" class="form-control" placeholder="Имя">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Телефон</label>
+                        <input type="text" name="phone" class="form-control" placeholder="Телефон">
+                    </div>
+
+                    <button type="submit" class="btn btn-default">Отправить</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
