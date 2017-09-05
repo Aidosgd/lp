@@ -63,6 +63,11 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+        @if(session()->has('message'))
+            <div class="alert alert-success">
+                <h1>{{ session()->get('message') }}</h1>
+            </div>
+        @endif
     </div>
 </header>
 <!-- Modal -->
@@ -70,9 +75,12 @@
     <div class="modal-dialog">
 
         <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Заказать звонок</h4>
+            </div>
             <div class="modal-body">
                 <form action="/callbacks" method="post">
-                    <h2>Заказать звонок</h2>
                     <div class="form-group">
                         <label>Имя</label>
                         <input type="text" name="name" class="form-control" placeholder="Имя">

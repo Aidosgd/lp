@@ -90,9 +90,12 @@
         <div class="modal-dialog">
 
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Заказать товар</h4>
+                </div>
                 <div class="modal-body">
                     <form action="/orders" method="post">
-                        <h2>Заказать товар</h2>
                         <div class="form-group">
                             <label>Имя</label>
                             <input type="text" name="name" class="form-control" placeholder="Имя">

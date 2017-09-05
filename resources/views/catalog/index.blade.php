@@ -31,19 +31,6 @@
                             </div>
                         </div>
                     </div>
-                    <h4>Бренд</h4>
-                    <div v-if="productBrand.length">
-                        <h4>Состояние</h4>
-                        <div class="checkbox-filter radio-checkbox">
-                            <div v-for="(brand, index) in productBrand" v-cloak>
-                                <input @click="checkFilter($event)"
-                                :data-value="index" data-filter="product_brand"
-                                v-bind:id="'brand' + index" type="checkbox" name="check"
-                                v-model="checkedNames" v-bind:value="brand.title">
-                                <label v-bind:for="'brand' + index">@{{ brand.title }}</label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="modal-filter">
                         <button class="btn btn-default" data-toggle="modal" data-target="#brand">Выбрать бренд</button>
                     </div>
@@ -119,26 +106,31 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div v-if="productBrand.length">
-                <h4>Состояние</h4>
-                <div class="checkbox-filter radio-checkbox">
-                    <div v-for="(brand, index) in productBrand" v-cloak>
-                        <input @click="checkFilter($event)"
-                        :data-value="index" data-filter="product_brand"
-                        v-bind:id="'brand' + index" type="checkbox" name="check"
-                        v-model="checkedNames" v-bind:value="brand.title">
-                        <label v-bind:for="'brand' + index">@{{ brand.title }}</label>
+        <!-- Modal -->
+        <div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Бренды</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div v-if="productBrand.length">
+                            <div class="checkbox-filter radio-checkbox">
+                                <div v-for="(brand, index) in productBrand" v-cloak>
+                                    <input @click="checkFilter($event)"
+                                           :data-value="index" data-filter="product_brand"
+                                           v-bind:id="'brand' + index" type="checkbox" name="check"
+                                           v-model="checkedNames" v-bind:value="brand.title">
+                                    <label v-bind:for="'brand' + index">@{{ brand.title }}</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
 @section('scripts')
     <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
@@ -201,45 +193,74 @@
 
                     setTimeout(function () {
                         if(_this.count >= 0 && _this.count > _this.checkedNames.length){
-                            _this.products = _this.productsAll;
+                            for (var key in _this.filterData){
+                                if(key == 'product_condition' && filter == 'product_condition'){
+                                    if (_this.filterData.product_condition.indexOf(value) != -1) {
+                                        _this.filterData.product_condition.splice(_this.filterData.product_condition.indexOf(value), 1);
+                                    }
+                                    console.log('product_condition', value)
+                                }else if(key == 'product_sex' && filter == 'product_sex'){
+                                    if (_this.filterData.product_sex.indexOf(value) != -1) {
+                                        _this.filterData.product_sex.splice(_this.filterData.product_sex.indexOf(value), 1);
+                                    }
+                                    console.log('product_sex', value)
+                                }else if(key == 'product_type' && filter == 'product_type'){
+                                    if (_this.filterData.product_type.indexOf(value) != -1) {
+                                        _this.filterData.product_type.splice(_this.filterData.product_type.indexOf(value), 1);
+                                    }
+                                    console.log('product_type', value)
+                                }else if(key == 'product_brand' && filter == 'product_brand'){
+                                    if (_this.filterData.product_brand.indexOf(value) != -1) {
+                                        _this.filterData.product_brand.splice(_this.filterData.product_brand.indexOf(value), 1);
+                                    }
+                                    console.log('product_brand', value)
+                                }
+                            }
+
+
+                            _this.products.filter(function(item) {
+                                if(_this.checkedNames.length == 0){
+                                    console.log('asd', _this.checkedNames.length)
+                                    item.show = true;
+                                }else{
+                                    if(filter == 'product_condition'){
+                                        _this.filterData.product_condition.indexOf(parseInt(item.product_condition)) != -1 ? item.show = true : item.show = false;
+                                        console.log('product_condition', value)
+                                    }else if(filter == 'product_sex'){
+                                        _this.filterData.product_sex.indexOf(parseInt(item.product_sex)) != -1 ? item.show = true : item.show = false;
+                                        console.log('product_sex', value)
+                                    }else if(filter == 'product_type'){
+                                        _this.filterData.product_type.indexOf(parseInt(item.product_type)) != -1 ? item.show = true : item.show = false;
+                                        console.log('product_type', value)
+                                    }else if(filter == 'product_brand'){
+                                        _this.filterData.product_brand.indexOf(parseInt(item.product_brand)) != -1 ? item.show = true : item.show = false;
+                                        console.log('product_brand', value)
+                                    }
+                                }
+
+                            });
                         }else{
                             for (var key in _this.filterData){
-                                if(key == 'product_condition'){
+                                if(key == 'product_condition' && filter == 'product_condition'){
                                     _this.filterData.product_condition.push(value);
-                                }else if(key == 'product_sex'){
+                                }else if(key == 'product_sex' && filter == 'product_sex'){
                                     _this.filterData.product_sex.push(value);
-                                }else if(key == 'product_type'){
+                                }else if(key == 'product_type' && filter == 'product_type'){
                                     _this.filterData.product_type.push(value);
-                                }else if(key == 'product_brand'){
+                                }else if(key == 'product_brand' && filter == 'product_brand'){
                                     _this.filterData.product_brand.push(value);
                                 }
                             }
 
                             _this.products.filter(function(item) {
                                 if(filter == 'product_condition'){
-                                    if (item.product_condition == value) {
-                                        item.show = true;
-                                    } else {
-                                        item.show = false;
-                                    }
+                                    _this.filterData.product_condition.indexOf(parseInt(item.product_condition)) != -1 ? item.show = true : item.show = false;
                                 }else if(filter == 'product_sex'){
-                                    if(item.product_sex == value ){
-                                        item.show = true;
-                                    }else{
-                                        item.show = false;
-                                    }
+                                    _this.filterData.product_sex.indexOf(parseInt(item.product_sex)) != -1 ? item.show = true : item.show = false;
                                 }else if(filter == 'product_type'){
-                                    if(item.product_type == value ){
-                                        item.show = true;
-                                    }else{
-                                        item.show = false;
-                                    }
+                                    _this.filterData.product_type.indexOf(parseInt(item.product_type)) != -1 ? item.show = true : item.show = false;
                                 }else if(filter == 'product_brand'){
-                                    if(item.product_brand == value ){
-                                        item.show = true;
-                                    }else{
-                                        item.show = false;
-                                    }
+                                    _this.filterData.product_brand.indexOf(parseInt(item.product_brand)) != -1 ? item.show = true : item.show = false;
                                 }
                             });
                         }
