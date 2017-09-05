@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="modal-filter">
-                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Выбрать бренд</button>
+                        <button class="btn btn-default" data-toggle="modal" data-target="#brand">Выбрать бренд</button>
                     </div>
                     <div v-if="productSex.length">
                         <h4>Кому</h4>
@@ -102,7 +102,7 @@
 
                     <div class="main-products">
                         <div class="row">
-                            <div v-for="product in products" v-cloak class="col-md-3">
+                            <div v-for="product in products" v-if="product.show" v-cloak class="col-md-3">
                                 <div class="product">
                                     <a v-bind:href="product.link">
                                         <img class="img-responsive" v-bind:src="product.img">
@@ -121,7 +121,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="brand" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div v-if="productBrand.length">
@@ -152,20 +152,6 @@
             if(url == href)
                 $(this).closest('li').addClass('active');
         });
-        $( function() {
-            $( "#slider-range" ).slider({
-                range: true,
-                min: {{ $minPrice }},
-                max: {{ $maxPrice }},
-                values: [ {{ $minPrice }}, {{ $maxPrice }} ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val(ui.values[ 0 ] );
-                    $( "#amount2" ).val(ui.values[ 1 ] );
-                }
-            });
-            $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ));
-            $( "#amount2" ).val($( "#slider-range" ).slider( "values", 1 ));
-        } );
 
         Vue.filter('priceFormat', function(value){
             return value.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ")
@@ -187,6 +173,7 @@
                     product_sex: [],
                     product_condition: [],
                     product_type: [],
+                    product_brand: [],
                 },
             },
 
@@ -216,15 +203,43 @@
                         if(_this.count >= 0 && _this.count > _this.checkedNames.length){
                             _this.products = _this.productsAll;
                         }else{
-                            _this.products = _this.products.filter(function(item) {
+                            for (var key in _this.filterData){
+                                if(key == 'product_condition'){
+                                    _this.filterData.product_condition.push(value);
+                                }else if(key == 'product_sex'){
+                                    _this.filterData.product_sex.push(value);
+                                }else if(key == 'product_type'){
+                                    _this.filterData.product_type.push(value);
+                                }else if(key == 'product_brand'){
+                                    _this.filterData.product_brand.push(value);
+                                }
+                            }
+
+                            _this.products.filter(function(item) {
                                 if(filter == 'product_condition'){
-                                    return item.product_condition != value ? item.show = false: item.show = true;
+                                    if (item.product_condition == value) {
+                                        item.show = true;
+                                    } else {
+                                        item.show = false;
+                                    }
                                 }else if(filter == 'product_sex'){
-                                    return item.product_sex != value ? item.show = false: item.show = true;
+                                    if(item.product_sex == value ){
+                                        item.show = true;
+                                    }else{
+                                        item.show = false;
+                                    }
                                 }else if(filter == 'product_type'){
-                                    return item.product_type != value ? item.show = false: item.show = true;
+                                    if(item.product_type == value ){
+                                        item.show = true;
+                                    }else{
+                                        item.show = false;
+                                    }
                                 }else if(filter == 'product_brand'){
-                                    return item.product_brand != value ? item.show = false: item.show = true;
+                                    if(item.product_brand == value ){
+                                        item.show = true;
+                                    }else{
+                                        item.show = false;
+                                    }
                                 }
                             });
                         }
@@ -232,24 +247,6 @@
                     }, 100);
 
                     this.count = this.checkedNames.length;
-
-//                    var result = this.products.indexOfForArrays(data);
-//                    console.log(result);
-
-//                    if(result == -1){
-//                        setTimeout(function(){
-////                            _this.filterData.push([value, filter]);
-//                        _this.sentRequest();
-//                        }, 100);
-//                    }else{
-//                        setTimeout(function(){
-////                            _this.filterData.remove(result);
-//                        _this.sentRequest();
-//                        }, 100);
-//                    }
-//                    setTimeout(function () {
-//                        _this.sentRequest();
-//                    }, 100);
 
                 },
                 sentRequest: function sentRequest(){
@@ -270,10 +267,31 @@
                         }
                     });
 
+                },
+                priceFilter: function priceFilter(val) {
+                    this.products.filter(function (item) {
+                        item.price >= val.values[0] && item.price <= val.values[1] ? item.show = true : item.show = false
+                    })
                 }
             },
 
             created: function created() {
+                var _this = this;
+                $( function() {
+                    $( "#slider-range" ).slider({
+                        range: true,
+                        min: {{ $minPrice }},
+                        max: {{ $maxPrice }},
+                        values: [ {{ $minPrice }}, {{ $maxPrice }} ],
+                        slide: function( event, ui ) {
+                            $( "#amount" ).val(ui.values[ 0 ] );
+                            $( "#amount2" ).val(ui.values[ 1 ] );
+                            _this.priceFilter(ui);
+                        }
+                    });
+                    $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ));
+                    $( "#amount2" ).val($( "#slider-range" ).slider( "values", 1 ));
+                } );
             }
         })
     </script>

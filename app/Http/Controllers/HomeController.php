@@ -128,6 +128,43 @@ class HomeController extends Controller
             })->first()->node->fields->price_1;
 
         }elseif($category->id == 2){
+            foreach($products_post as $product_post) {
+                $manufacturer = [
+                    1 => isset($product_post->node->fields->manufacturer_1) ? $product_post->node->fields->manufacturer_1 : '',
+                    2 => isset($product_post->node->fields->manufacturer_2) ? $product_post->node->fields->manufacturer_2 : '',
+                    3 => isset($product_post->node->fields->manufacturer_3) ? $product_post->node->fields->manufacturer_3 : '',
+                ];
+
+                $price = [
+                    1 => isset($product_post->node->fields->price_1) ? $product_post->node->fields->price_1 : '',
+                    2 => isset($product_post->node->fields->price_2) ? $product_post->node->fields->price_2 : '',
+                    3 => isset($product_post->node->fields->price_3) ? $product_post->node->fields->price_3 : '',
+                ];
+
+                $price_d = $price[$category->id] / $currencies;
+
+                $products->push([
+                    'link' => '/catalog/'.$category->node->slug.'/'.$product_post->node->slug,
+                    'img' => $product_post->images[0]->path,
+                    'brand' => $fields->options['options']['ru'][$manufacturer[$product_post->category->id]],
+                    'title' => str_limit($product_post->node->title, 25),
+                    'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
+                    'price' => $price[$category->id],
+                    'price_d' => number_format($price_d),
+                    'product_condition' => $product_post->node->fields->product_condition_2,
+                    'product_type' => $product_post->node->fields->product_type_2,
+                    'product_brand' => $product_post->node->fields->manufacturer_2,
+                    'show' => true,
+                ]);
+            }
+
+            $fields = $fields->options['options']['ru'];
+            $productBrand = new Collection();
+            foreach($fields as $product) {
+                $productBrand->push([
+                    'title' => $product,
+                ]);
+            }
 
             $product_condition = Field::where('slug', 'product_condition_2')->first();
             $product_condition = $product_condition->options['options']['ru'];
@@ -149,6 +186,42 @@ class HomeController extends Controller
             })->first()->node->fields->price_2;
 
         }elseif($category->id == 3){
+            foreach($products_post as $product_post) {
+                $manufacturer = [
+                    1 => isset($product_post->node->fields->manufacturer_1) ? $product_post->node->fields->manufacturer_1 : '',
+                    2 => isset($product_post->node->fields->manufacturer_2) ? $product_post->node->fields->manufacturer_2 : '',
+                    3 => isset($product_post->node->fields->manufacturer_3) ? $product_post->node->fields->manufacturer_3 : '',
+                ];
+
+                $price = [
+                    1 => isset($product_post->node->fields->price_1) ? $product_post->node->fields->price_1 : '',
+                    2 => isset($product_post->node->fields->price_2) ? $product_post->node->fields->price_2 : '',
+                    3 => isset($product_post->node->fields->price_3) ? $product_post->node->fields->price_3 : '',
+                ];
+
+                $price_d = $price[$category->id] / $currencies;
+
+                $products->push([
+                    'link' => '/catalog/'.$category->node->slug.'/'.$product_post->node->slug,
+                    'img' => $product_post->images[0]->path,
+                    'brand' => $fields->options['options']['ru'][$manufacturer[$product_post->category->id]],
+                    'title' => str_limit($product_post->node->title, 25),
+                    'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
+                    'price' => $price[$category->id],
+                    'price_d' => number_format($price_d),
+                    'product_condition' => $product_post->node->fields->product_condition_3,
+                    'product_brand' => $product_post->node->fields->manufacturer_3,
+                    'show' => true,
+                ]);
+            }
+
+            $fields = $fields->options['options']['ru'];
+            $productBrand = new Collection();
+            foreach($fields as $product) {
+                $productBrand->push([
+                    'title' => $product,
+                ]);
+            }
 
             $product_condition = Field::where('slug', 'product_condition_3')->first();
             $product_condition = $product_condition->options['options']['ru'];

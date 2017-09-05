@@ -12,11 +12,11 @@ class MailController extends Controller
 {
     public function callbacks(Request $request, Mailer $mailer)
     {
-//        $emails = ['denisov_sv@mail.ru', 'manager141214@mail.ru', 'gorbenko_oleg@mail.ru','aidosgd@gmail.com'];
-//        $mailer->send('emails.mail', ['name' => $request->input('name'), 'phone' => $request->input('phone')], function ($m) use ($emails) {
-//            $m->from('info@russdoors.kz', 'Заявка с сайта Russdoors');
-//            $m->to($emails, 'Aidos')->subject('Заявка с сайта Russdoors');
-//        });
+        $emails = ['vlasovmaxim96@gmail.com', 'aidosgd@gmail.com'];
+        $mailer->send('emails.mail', ['name' => $request->input('name'), 'phone' => $request->input('phone')], function ($m) use ($emails) {
+            $m->from('info@perspectiva-lombard.kz', 'Заявка на звонок');
+            $m->to($emails, 'Aidos')->subject('Заявка на звонок');
+        });
 
         $this->validate($request, [
             'name' => 'required',
@@ -34,11 +34,11 @@ class MailController extends Controller
 
     public function orders(Request $request, Mailer $mailer)
     {
-//        $emails = ['denisov_sv@mail.ru', 'manager141214@mail.ru', 'gorbenko_oleg@mail.ru','aidosgd@gmail.com'];
-//        $mailer->send('emails.mail', ['name' => $request->input('name'), 'phone' => $request->input('phone')], function ($m) use ($emails) {
-//            $m->from('info@russdoors.kz', 'Заявка с сайта Russdoors');
-//            $m->to($emails, 'Aidos')->subject('Заявка с сайта Russdoors');
-//        });
+        $emails = ['vlasovmaxim96@gmail.com', 'aidosgd@gmail.com'];
+        $mailer->send('emails.mail', ['name' => $request->input('name'), 'phone' => $request->input('phone')], function ($m) use ($emails) {
+            $m->from('info@perspectiva-lombard.kz', 'Заявка на товар');
+            $m->to($emails, 'Aidos')->subject('Заявка на товар');
+        });
 
         $this->validate($request, [
             'name' => 'required',
