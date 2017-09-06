@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Ibec\Admin\Fields\Field;
 use Ibec\Content\Category;
 use Ibec\Content\Post;
+use Ibec\Content\PostNode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use function MongoDB\BSON\toJSON;
@@ -248,107 +249,6 @@ class HomeController extends Controller
             'productCondition', 'productSex', 'productType', 'minPrice', 'maxPrice'));
     }
 
-    public function catalogPost($catalog, Request $request)
-    {
-        $filters = $request->all();
-
-        $category = Category::whereHas('nodes', function ($q) use ($catalog){
-            $q->where('slug', $catalog);
-        })->first();
-
-        $products_post = Post::query();
-
-        $products_post->where('category_id', $category->id);
-
-        if($filters['product_condition']){
-            $products_post->whereHas('nodes', function($q) use ($filters){
-                if (count($filters['product_condition']) == 1){
-                    $q->whereRaw('JSON_CONTAINS(fieldsproduct_condition" = ?', (string)$filters['product_condition'][0]);
-//                    $q->where('fields->product_condition', (string)$filters['product_condition'][0]);
-                }else{
-                    $q->whereIn('fields->product_condition', $filters['product_condition']);
-                }
-
-            });
-        }
-        if($filters['product_sex']){
-            $products_post->whereHas('nodes', function($q) use ($filters){
-                if (count($filters['product_sex']) == 1){
-                    $q->where('fields->product_sex', (string)$filters['product_sex'][0]);
-                }else{
-                    $q->whereIn('fields->product_sex', $filters['product_sex']);
-                }
-
-            });
-        }
-        if($filters['product_type']){
-            $products_post->whereHas('nodes', function($q) use ($filters){
-                if (count($filters['product_type']) == 1){
-                    $q->where('fields->product_type', (string)$filters['product_type'][0]);
-                }else{
-                    $q->whereIn('fields->product_type', $filters['product_type']);
-                }
-
-            });
-        }
-
-        $products_post = $products_post->get();
-
-//        dd($products_post->count());
-
-
-        $products = new Collection();
-
-        $manufacturer = [
-            1 => 'manufacturer_1',
-            2 => 'manufacturer_2',
-            3 => 'manufacturer_3',
-        ];
-
-        $fields = Field::where('slug', $manufacturer[$category->id])->first();
-        $fields2 = Field::where('slug', 'product_material_case')->first();
-
-        $url = "http://www.nationalbank.kz/rss/get_rates.cfm?fdate=".date("d.m.Y");
-        $xml = simplexml_load_file($url);
-
-        $currencies = [];
-
-        foreach($xml->item as $currency_xml)
-        {
-            $currencies[(string)$currency_xml->title] = $currency_xml;
-        }
-
-        $currencies = $currencies['USD']->description;
-
-        foreach($products_post as $product_post) {
-            $manufacturer = [
-                1 => isset($product_post->node->fields->manufacturer_1) ? $product_post->node->fields->manufacturer_1 : '',
-                2 => isset($product_post->node->fields->manufacturer_2) ? $product_post->node->fields->manufacturer_2 : '',
-                3 => isset($product_post->node->fields->manufacturer_3) ? $product_post->node->fields->manufacturer_3 : '',
-            ];
-
-            $price = [
-                1 => isset($product_post->node->fields->price_1) ? $product_post->node->fields->price_1 : '',
-                2 => isset($product_post->node->fields->price_2) ? $product_post->node->fields->price_2 : '',
-                3 => isset($product_post->node->fields->price_3) ? $product_post->node->fields->price_3 : '',
-            ];
-
-            $price_d = $price[$category->id] / $currencies;
-
-            $products->push([
-                'link' => '/catalog/'.$category->node->slug.'/'.$product_post->node->slug,
-                'img' => $product_post->images[0]->path,
-                'brand' => $fields->options['options']['ru'][$manufacturer[$product_post->category->id]],
-                'title' => str_limit($product_post->node->title, 25),
-                'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
-                'price' => $price[$category->id],
-                'price_d' => number_format($price_d),
-            ]);
-        }
-
-        return response()->json($products);
-    }
-
     public function show($catalog, $slug)
     {
         $category = Category::whereHas('nodes', function ($q) use ($catalog){
@@ -381,5 +281,18 @@ class HomeController extends Controller
 
         return view('catalog.show', compact('category', 'product', 'fields',
             'fields2', 'fields3', 'fields4', 'fields5', 'fields6'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('product');
+        $articles = Post::whereHas('nodes', function ($q) use ($query){
+            $q->where('title', 'LIKE', '%' . $query . '%');
+            $q->orWhere('content', 'like', '%'.$query.'%');
+        })->get();
+
+
+        
+        return view('pages.search', compact('articles', 'query'));
     }
 }

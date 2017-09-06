@@ -13,12 +13,13 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
-Route::get('/catalog/{catalog}', 'HomeController@catalog');
-Route::post('/catalog/{catalog}', 'HomeController@catalogPost');
-Route::get('/catalog/{catalog}/{slug}', 'HomeController@show');
+Route::get('catalog/{catalog}', 'HomeController@catalog');
+Route::get('catalog/{catalog}/{slug}', 'HomeController@show');
+Route::get('search', 'HomeController@search');
 
 Route::get('pages/{slug?}', 'PagesController@show');
 Route::get('contacts', 'PagesController@contacts');
 
 Route::post('callbacks', 'MailController@callbacks');
 Route::post('orders', 'MailController@orders');
+
