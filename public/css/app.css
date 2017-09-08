@@ -11253,6 +11253,15 @@ footer .container .footer-body .soc a i {
   font-size: 30px;
 }
 
+footer .container .footer-body .soc a i.fa-instagram {
+  font-size: 32px;
+}
+
+footer .container .footer-body .soc a i.fa-instagram:before {
+  position: relative;
+  top: 1px;
+}
+
 footer .container .footer-body .subs {
   padding: 5px;
 }

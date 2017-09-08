@@ -1187,7 +1187,7 @@
                                 <div class="main-services__icon main-services__icon--first">
                                     <img src="/images/4c884d50b8.png" alt="">
                                     <div class="text_hover">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Залог часов - это надежный и быстрый способ получить наличные средства.
                                     </div>
                                 </div>
                                 <div class="btn btn-default">Залог</div>
@@ -1622,7 +1622,7 @@
                                 <div class="main-services__icon main-services__icon--first">
                                     <img src="/images/6c037e15af.png" alt="">
                                     <div class="text_hover">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Скупка изделий из серебра, несмотря на невысокую стоимость металла
                                     </div>
                                 </div>
                                 <div class="btn btn-default">Скупка</div>
@@ -2057,7 +2057,7 @@
                                 <div class="main-services__icon main-services__icon--first">
                                     <img src="/images/7f267b3163.png" alt="">
                                     <div class="text_hover">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                        Выкуп оригинальных швейцарских часов ломбардом «Перспектива».
                                     </div>
                                 </div>
                                 <div class="btn btn-default">Оценка</div>
@@ -2085,7 +2085,7 @@
                                     $price_d = $price / $currencies;
                                 ?>
                                 <div class="product__price">{{ $price }} тг</div>
-                                <div class="product__price-dollar">~ {{ number_format($price_d) }} $</div>
+                                <div class="product__price-dollar">~ {{ number_format($price_d, 0, '', ' ') }} $</div>
                             </a>
                         </div>
                     </div>

@@ -49,14 +49,18 @@
                     <div class="range-filter">
                         <div id="slider-range"></div>
                         <div class="range-input">
-                            от <input type="text" id="amount" readonly>
-                            до <input type="text" id="amount2" readonly> тг
+                            от <input class="money" type="text" id="amount" readonly>
+                            до <input class="money" type="text" id="amount2" readonly> тг
                         </div>
                     </div>
                     <div v-if="productType.length">
-                        <h4>Тип</h4>
+                        <h4 class="collapsed" role="button"
+                            data-toggle="collapse"
+                            href="#collapseExample3"
+                            aria-expanded="false"
+                            aria-controls="collapseExample3">Тип <i class="fa fa-caret-down"></i></h4>
                         <div class="checkbox-filter radio-checkbox">
-                            <div class="checkbox-filter radio-checkbox">
+                            <div class="collapse" id="collapseExample3">
                                 <div v-for="(type, index) in productType" v-cloak>
                                     <input @click="checkFilter($event)" :data-value="index"
                                     data-filter="product_type" v-bind:id="'type' + index" type="checkbox"
@@ -136,6 +140,7 @@
     <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/vue.resource/1.0.3/vue-resource.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
     <script>
         // Main menu active li elements
         $('.catalog-menu a').each(function(){
@@ -308,11 +313,23 @@
                             $( "#amount" ).val(ui.values[ 0 ] );
                             $( "#amount2" ).val(ui.values[ 1 ] );
                             _this.priceFilter(ui);
+                            $('.money').unmask();
+                            $('.money').mask('000 000 000 000 000 000', {reverse: true});
                         }
                     });
                     $( "#amount" ).val($( "#slider-range" ).slider( "values", 0 ));
                     $( "#amount2" ).val($( "#slider-range" ).slider( "values", 1 ));
+
                 } );
+
+                $(document).ready(function(){
+                    $('.money').mask('000 000 000 000 000 000', {reverse: true});
+                });
+
+                var windowHeight = $('html').height(),
+                    pagesMenu = $('.catalog-sidebar');
+
+                pagesMenu.css('min-height', windowHeight);
             }
         })
     </script>

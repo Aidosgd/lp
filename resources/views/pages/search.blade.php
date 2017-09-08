@@ -1,50 +1,42 @@
 @extends('layouts.app')
 
-@section('styles')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <style>
-        [v-cloak] {
-            display: none
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="catalog" id="app">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12 catalog-content">
-                    <div class="top-content">
-                        <div class="categories">
-                            <ul class="nav nav-pills catalog-menu">
-                                <li><a href="/catalog/clocks">Швейцарские часы</a></li>
-                                <li><a href="/catalog/jewelries">Ювелирные украшения</a></li>
-                                <li><a href="/catalog/accessories">Аксессуары</a></li>
-                            </ul>
-                        </div>
-                        <div class="pull-right sort-by">
-                            <select name="sortBy" id="">
-                                <option value="0">По новизне</option>
-                                <option value="1">по возрастанию цены</option>
-                                <option value="2">по убыванию цены</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="main-products">
+                    <div class="main-products" style="padding-top: 80px;">
                         <div class="row">
-                            @foreach($articles as $item)
+                            @foreach($products as $product)
                                 <div class="col-md-3">
                                     <div class="product">
-                                        <a v-bind:href="product.link">
-                                            <img class="img-responsive" src="{{ $item->images->first()->path }}">
-                                            <div class="product__title">{{ $item->node->brand }}</div>
-                                            <div class="product__desc">{{ $item->node->title }}</div>
-                                            <div class="product__desc-sec">{{ $item->node->product_material_case }}</div>
-                                            <div class="product__price">{{ $item->node->price }} тг</div>
-                                            <div class="product__price-dollar">~ {{ $item->node->price_d }} $</div>
+                                        <a href="{{ $product->category->id != 6 ? '/catalog' : '' }}/{{ $product->category->node->slug }}/{{ $product->node->slug }}">
+                                            <img class="img-responsive" src="{{ $product->images->count() ? $product->images->first()->path : ''}}" alt="">
+                                            @if($product->category->id != 6)
+                                                <div class="product__title">
+                                                    <?php
+                                                        $brand = [
+                                                            1 => isset($product->node->fields->manufacturer_1) ? $fieldsm1->options['options']['ru'][$product->node->fields->manufacturer_1] : '',
+                                                            2 => isset($product->node->fields->manufacturer_2) ? $fieldsm2->options['options']['ru'][$product->node->fields->manufacturer_2] : '',
+                                                            3 => isset($product->node->fields->manufacturer_3) ? $fieldsm3->options['options']['ru'][$product->node->fields->manufacturer_3] : ''
+                                                        ];
+                                                    ?>
+                                                    {{ $brand[$product->category->id] }}
+                                                </div>
+                                            @endif
+                                            <div class="product__desc" style="font-size: 20px;">{{ str_limit($product->node->title, 30) }}</div>
+                                            @if($product->category->id != 6)
+                                                <?php
+                                                    $price = [
+                                                        1 => isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '',
+                                                        2 => isset($product->node->fields->price_2) ? $product->node->fields->price_2 : '',
+                                                        3 => isset($product->node->fields->price_3) ? $product->node->fields->price_3 : ''
+                                                    ];
+                                                    $price_d = $price[$product->category->id] / $currencies;
+                                                ?>
+                                                <div class="product__price">{{ $price[$product->category->id] }} тг</div>
+                                                <div class="product__price-dollar">~ {{ number_format($price_d) }} $</div>
+                                            @endif
                                         </a>
                                     </div>
                                 </div>

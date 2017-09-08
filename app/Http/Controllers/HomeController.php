@@ -74,7 +74,7 @@ class HomeController extends Controller
                     'title' => str_limit($product_post->node->title, 25),
                     'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
                     'price' => $price[$category->id],
-                    'price_d' => number_format($price_d),
+                    'price_d' => number_format($price_d, 0, ',', ' '),
                     'product_condition' => $product_post->node->fields->product_condition,
                     'product_sex' => $product_post->node->fields->product_sex,
                     'product_type' => $product_post->node->fields->product_type,
@@ -151,7 +151,7 @@ class HomeController extends Controller
                     'title' => str_limit($product_post->node->title, 25),
                     'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
                     'price' => $price[$category->id],
-                    'price_d' => number_format($price_d),
+                    'price_d' => number_format($price_d, 0, ',', ' '),
                     'product_condition' => $product_post->node->fields->product_condition_2,
                     'product_type' => $product_post->node->fields->product_type_2,
                     'product_brand' => $product_post->node->fields->manufacturer_2,
@@ -209,7 +209,7 @@ class HomeController extends Controller
                     'title' => str_limit($product_post->node->title, 25),
                     'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
                     'price' => $price[$category->id],
-                    'price_d' => number_format($price_d),
+                    'price_d' => number_format($price_d, 0, ',', ' '),
                     'product_condition' => $product_post->node->fields->product_condition_3,
                     'product_brand' => $product_post->node->fields->manufacturer_3,
                     'show' => true,
@@ -286,13 +286,17 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('product');
-        $articles = Post::whereHas('nodes', function ($q) use ($query){
+        $products = Post::whereHas('nodes', function ($q) use ($query){
             $q->where('title', 'LIKE', '%' . $query . '%');
             $q->orWhere('content', 'like', '%'.$query.'%');
+            $q->orWhere('fields', 'like', '%'.$query.'%');
         })->get();
 
-
+        $fieldsm1 = Field::where('slug', 'manufacturer_1')->first();
+        $fieldsm2 = Field::where('slug', 'manufacturer_2')->first();
+        $fieldsm3 = Field::where('slug', 'manufacturer_3')->first();
+        $fields2 = Field::where('slug', 'product_material_case')->first();
         
-        return view('pages.search', compact('articles', 'query'));
+        return view('pages.search', compact('products', 'query', 'fieldsm1', 'fieldsm2', 'fieldsm3', 'fields2'));
     }
 }

@@ -324,6 +324,13 @@ footer{
           i{
             color: #a0abb7;
             font-size: 30px;
+            &.fa-instagram{
+              font-size: 32px;
+              &:before{
+                position: relative;
+                top: 1px;
+              }
+            }
           }
         }
       }

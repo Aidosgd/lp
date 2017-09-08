@@ -22,10 +22,8 @@
                     </div>
                     <div class="col-md-2 soc">
                         <h4>Мы в соц. сетях</h4>
-                        <a href=""><i class="fa fa-facebook-square"></i></a>
-                        <a href=""><i class="fa fa-facebook-square"></i></a>
-                        <a href=""><i class="fa fa-facebook-square"></i></a>
-                        <a href=""><i class="fa fa-facebook-square"></i></a>
+                        <a target="_blank" href="https://www.facebook.com/lombard.perspectiva "><i class="fa fa-facebook-square"></i></a>
+                        <a target="_blank" href="https://www.instagram.com/almaty_perspectiva/"><i class="fa fa-instagram"></i></a>
                     </div>
                     <div class="col-md-3">
                         <h4>Подписка на рассылку</h4>
