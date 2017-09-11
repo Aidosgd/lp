@@ -11463,6 +11463,11 @@ footer .container .footer-body .subs {
   padding: 5px 5px;
 }
 
+.product-page .bx-wrapper {
+  border: 0;
+  box-shadow: none;
+}
+
 .product-page #bx-pager img {
   padding: 15px 5px;
   border: 1px solid #b6b6b9;
@@ -11489,14 +11494,14 @@ footer .container .footer-body .subs {
 .product-page__price {
   display: inline-block;
   color: #393a3c;
-  font-size: 18px;
+  font-size: 28px;
   padding-top: 7px;
 }
 
 .product-page__price-dollar {
   display: inline-block;
   color: #393a3c;
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: 5px;
 }
 
@@ -11515,11 +11520,17 @@ footer .container .footer-body .subs {
   border: 1px solid #405663;
   border-radius: 0;
   padding: 5px 10px;
-  color: #405663;
+  color: #6a7688;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .product-page .product-descriptions {
   margin-top: 30px;
+}
+
+.product-page .product-descriptions .border-right {
+  border-right: 1px solid #b6b6b9;
 }
 
 .product-page .product-descriptions ul {
@@ -11554,6 +11565,8 @@ footer .container .footer-body .subs {
   font-style: normal;
   color: black;
   float: right;
+  max-width: 350px;
+  text-align: right;
 }
 
 .pages .pages-menu {

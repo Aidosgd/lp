@@ -522,6 +522,10 @@ footer{
 }
 
 .product-page{
+  .bx-wrapper{
+    border: 0;
+    box-shadow: none;
+  }
   #bx-pager{
     img{
       padding: 15px 5px;
@@ -546,13 +550,13 @@ footer{
   &__price{
     display: inline-block;
     color: #393a3c;
-    font-size: 18px;
+    font-size: 28px;
     padding-top: 7px;
   }
   &__price-dollar{
     display: inline-block;
     color: #393a3c;
-    font-size: 10px;
+    font-size: 12px;
     padding-bottom: 5px;
   }
   .company-desc{
@@ -568,10 +572,15 @@ footer{
     border: 1px solid #405663;
     border-radius: 0;
     padding: 5px 10px;
-    color: #405663;
+    color: #6a7688;
+    font-size: 20px;
+    font-weight: bold;
   }
   .product-descriptions{
     margin-top: 30px;
+    .border-right{
+      border-right: 1px solid #b6b6b9;
+    }
     ul{
       padding: 0;
       li{
@@ -597,6 +606,8 @@ footer{
             font-style: normal;
             color: black;
             float: right;
+            max-width: 350px;
+            text-align: right;
           }
         }
       }
