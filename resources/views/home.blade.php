@@ -2084,7 +2084,7 @@
                                     $price = isset($product->node->fields->price_1) ? $product->node->fields->price_1 : '';
                                     $price_d = $price / $currencies;
                                 ?>
-                                <div class="product__price">{{ $price }} тг</div>
+                                <div class="product__price">{{ number_format($price, 0, '', ' ') }} тг</div>
                                 <div class="product__price-dollar">~ {{ number_format($price_d, 0, '', ' ') }} $</div>
                             </a>
                         </div>

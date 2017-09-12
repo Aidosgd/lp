@@ -72,13 +72,15 @@ class HomeController extends Controller
                     'img' => $product_post->images[0]->path,
                     'brand' => $fields->options['options']['ru'][$manufacturer[$product_post->category->id]],
                     'title' => str_limit($product_post->node->title, 25),
-                    'product_material_case' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
+                    'product_material_case_text' => isset($product_post->node->fields->product_material_case) ? $fields2->options['options']['ru'][$product_post->node->fields->product_material_case] : '',
+                    'product_material_case' => $product_post->node->fields->product_material_case,
                     'price' => $price[$category->id],
                     'price_d' => number_format($price_d, 0, ',', ' '),
                     'product_condition' => $product_post->node->fields->product_condition,
                     'product_sex' => $product_post->node->fields->product_sex,
                     'product_type' => $product_post->node->fields->product_type,
                     'product_brand' => $product_post->node->fields->manufacturer_1,
+                    'product_case' => $product_post->node->fields->product_case,
                     'show' => true,
                 ]);
             }
@@ -114,6 +116,24 @@ class HomeController extends Controller
             $productType = new Collection();
             foreach($product_type as $product) {
                 $productType->push([
+                    'title' => $product,
+                ]);
+            }
+
+            $product_case = Field::where('slug', 'product_case')->first();
+            $product_case = $product_case->options['options']['ru'];
+            $productCase = new Collection();
+            foreach($product_case as $product) {
+                $productCase->push([
+                    'title' => $product,
+                ]);
+            }
+
+            $product_material_case = Field::where('slug', 'product_material_case')->first();
+            $product_material_case = $product_material_case->options['options']['ru'];
+            $productMaterialCase = new Collection();
+            foreach($product_material_case as $product) {
+                $productMaterialCase->push([
                     'title' => $product,
                 ]);
             }
@@ -246,7 +266,7 @@ class HomeController extends Controller
         }
 
         return view('catalog.index', compact('products', 'category', 'productBrand', 'fields2',
-            'productCondition', 'productSex', 'productType', 'minPrice', 'maxPrice'));
+            'productCondition', 'productSex', 'productType', 'productCase', 'productMaterialCase', 'minPrice', 'maxPrice'));
     }
 
     public function show($catalog, $slug)
