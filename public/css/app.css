@@ -11647,4 +11647,76 @@ footer .container .footer-body .subs {
   margin: auto;
 }
 
+@media (max-width: 576px) {
+  .container {
+    width: 100%;
+  }
+  header .container {
+    padding: 0;
+  }
+  .main-nav-body:before, .main-nav-body:after {
+    content: none;
+  }
+  .main-nav .container {
+    padding: 0;
+  }
+  .main-nav__left {
+    text-align: center;
+  }
+  .main-nav__svg--first {
+    width: 100px;
+  }
+  .main-services .container {
+    padding: 0;
+  }
+  .main-services-body {
+    padding: 30px 0;
+  }
+  .main-services__icon img {
+    width: 100%;
+  }
+  .main-products {
+    padding: 15px;
+  }
+  .main-products .container-fluid {
+    padding: 15px;
+  }
+  .main-products .col-md-1 {
+    width: 100% !important;
+  }
+  footer {
+    padding: 15px 0;
+  }
+  footer .container {
+    padding: 0;
+  }
+  .catalog .catalog-sidebar {
+    min-height: inherit !important;
+  }
+  .catalog .catalog-content:before {
+    content: none;
+  }
+  .catalog .catalog-content .sort-by {
+    text-align: center;
+    float: none !important;
+  }
+  .product-page .company-desc {
+    margin-top: 30px;
+  }
+  .pages .pages-menu {
+    height: inherit !important;
+    padding: 0;
+  }
+  .pages .pages-menu > li {
+    width: 50%;
+    float: left;
+  }
+  .pages .pages-menu:before {
+    content: none;
+  }
+  .contacts .slider {
+    border: 0;
+  }
+}
+
 /*# sourceMappingURL=app.css.map */

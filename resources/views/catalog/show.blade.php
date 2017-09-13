@@ -6,14 +6,14 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="picture row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-xs-6">
                             <div id="bx-pager">
                                 @foreach($product->images as $index => $image)
                                     <a data-slide-index="{{ $index }}" href=""><img class="img-responsive" src="{{ $image->path }}" /></a>
                                 @endforeach
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 col-xs-6">
                             <ul class="bxslider">
                                 @foreach($product->images as $image)
                                     <li><img class="img-responsive" src="{{ $image->path }}" /></li>
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-12">
                     <?php
                     $manufacturer = [
                         1 => isset($product->node->fields->manufacturer_1) ? $product->node->fields->manufacturer_1 : '',
@@ -45,7 +45,7 @@
                     <div class="product-page__price-dollar">~ {{ number_format($price_d, 0, ',', ' ') }} $</div>
                     <button data-toggle="modal" data-target="#orders" class="btn btn-default">Заказать</button>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-xs-12">
                     <div class="company-desc">
                         {!! $product->node->content !!}
                     </div>

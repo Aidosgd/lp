@@ -7,7 +7,7 @@
             <div class="main-nav-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-5 main-nav__left">
+                        <div class="col-md-5 col-xs-12 main-nav__left">
                             <h1>ЧАСОВОЙ ЛОМБАРД</h1>
                             <h2>Перспектива и выгода</h2>
                             <p class="main-nav__description">
@@ -19,9 +19,9 @@
                                 <a href="/pages/about-lombard">Подробнее</a>
                             </p>
                         </div>
-                        <div class="col-md-7 main-nav__right">
+                        <div class="col-md-7 col-xs-12 main-nav__right">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4">
                                     <a href="/catalog/clocks">
                                         Швейцарские часы
                                         <div class="main-nav__svg--first">
@@ -264,7 +264,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4">
                                     <a href="/catalog/jewelries">
                                         Ювелирные украшения
                                         <div class="main-nav__svg--second">
@@ -432,7 +432,7 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 col-xs-4">
                                     <a href="/catalog/accessories">
                                         Аксессуары
                                         <div class="main-nav__svg--third">
@@ -756,7 +756,7 @@
             <div class="main-services-body">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4 main-services__item">
+                        <div class="col-md-4 col-xs-4 main-services__item">
                             <a href="/pages/pledge">
                                 <div class="main-services__svg">
                                     <svg version="1.1" id="Слой_1"
@@ -1193,7 +1193,7 @@
                                 <div class="btn btn-default">Залог</div>
                             </a>
                         </div>
-                        <div class="col-md-4 main-services__item">
+                        <div class="col-md-4 col-xs-4 main-services__item">
                             <a href="/pages/purchase">
                                 <div class="main-services__svg">
                                     <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -1628,7 +1628,7 @@
                                 <div class="btn btn-default">Скупка</div>
                             </a>
                         </div>
-                        <div class="col-md-4 main-services__item">
+                        <div class="col-md-4 col-xs-4 main-services__item">
                             <a href="/pages/valuation">
                                 <div class="main-services__svg">
                                     <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

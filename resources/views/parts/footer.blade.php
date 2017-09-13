@@ -3,12 +3,12 @@
         <div class="footer-body">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-xs-6">
                         <a href="/">
                             <img src="/images/logo.png" style="width: 90%;padding-top: 20px;" alt="">
                         </a>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 hidden-xs">
                         <h4>Страницы</h4>
                         <ul>
                             <li><a href="/catalog/clocks">Каталог</a></li>
@@ -20,12 +20,12 @@
                             <li><a href="/contacts">Контакты</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-2 soc">
+                    <div class="col-md-2 col-xs-6 soc">
                         <h4>Мы в соц. сетях</h4>
                         <a target="_blank" href="https://www.facebook.com/lombard.perspectiva "><i class="fa fa-facebook-square"></i></a>
                         <a target="_blank" href="https://www.instagram.com/almaty_perspectiva/"><i class="fa fa-instagram"></i></a>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <h4>Подписка на рассылку</h4>
                         <input class="subs" type="text" placeholder="Ваш e-mail">
                     </div>

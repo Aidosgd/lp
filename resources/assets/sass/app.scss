@@ -686,3 +686,105 @@ footer{
     }
   }
 }
+
+@media(max-width:576px){
+  .container{
+    width: 100%;
+  }
+  header{
+    .container{
+      padding: 0;
+    }
+  }
+
+  .main-nav{
+    &-body{
+      &:before, &:after{
+        content: none;
+      }
+    }
+    .container{
+      padding: 0;
+    }
+    &__left{
+      text-align: center;
+    }
+    &__svg{
+      &--first{
+        width: 100px;
+      }
+    }
+  }
+
+  .main-services{
+    .container{
+      padding: 0;
+    }
+    &-body{
+      padding: 30px 0;
+    }
+    &__icon{
+      img{
+        width: 100%;
+      }
+    }
+  }
+
+  .main-products{
+    padding: 15px;
+    .container-fluid{
+      padding: 15px;
+    }
+    .col-md-1{
+      width: 100% !important;
+    }
+  }
+
+  footer{
+    padding: 15px 0;
+    .container{
+      padding: 0;
+    }
+  }
+
+  .catalog{
+    .catalog-sidebar{
+      min-height: inherit !important;
+    }
+    .catalog-content{
+      &:before{
+        content: none;
+      }
+      .sort-by{
+        text-align: center;
+        float: none !important;
+      }
+    }
+  }
+
+  .product-page{
+    .company-desc{
+      margin-top: 30px;
+    }
+  }
+
+  .pages{
+    .pages-menu{
+      height: inherit !important;
+      padding: 0;
+      & > li{
+        width: 50%;
+        float: left;
+      }
+      &:before{
+        content: none;
+      }
+    }
+  }
+
+  .contacts{
+    .slider{
+      border: 0;
+    }
+  }
+}
