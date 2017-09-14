@@ -11051,6 +11051,9 @@ header .navbar .collapse .nav.navbar-right a span {
 .main-nav__svg--first {
   margin-top: 0px;
   width: 154px;
+  background: url(/images/0913585e-7bdd-49dc-a18d-b08b1178a8d1.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .main-nav__svg--first:hover .hover-img {
@@ -11070,6 +11073,9 @@ header .navbar .collapse .nav.navbar-right a span {
 
 .main-nav__svg--second {
   padding-top: 15px;
+  background: url(/images/e7239da9-afae-4d8c-bbae-d801094425a8.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .main-nav__svg--second:hover .hover-img {
@@ -11091,6 +11097,9 @@ header .navbar .collapse .nav.navbar-right a span {
   margin-top: -30px;
   position: relative;
   top: 20px;
+  background: url(/images/8205f225-c291-4b1b-a6e2-9ab50690d72a.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .main-nav__svg--third:hover .hover-img {
@@ -11113,6 +11122,16 @@ header .navbar .collapse .nav.navbar-right a span {
   background-size: contain;
 }
 
+.main-services__item:hover .main-services__icon img {
+  opacity: 0;
+}
+
+.main-services__item:hover .main-services__icon .text_hover {
+  display: block;
+  opacity: 1;
+  transition: 0.4s;
+}
+
 .main-services__item a {
   position: relative;
   display: block;
@@ -11130,12 +11149,10 @@ header .navbar .collapse .nav.navbar-right a span {
   left: 50%;
 }
 
-.main-services__icon:hover .text_hover {
-  display: block;
-}
-
-.main-services__icon:hover img {
-  display: none;
+.main-services__icon img {
+  position: relative;
+  top: 60px;
+  transition: 0.4s;
 }
 
 .main-services__icon--first {
@@ -11144,7 +11161,9 @@ header .navbar .collapse .nav.navbar-right a span {
 }
 
 .main-services__icon .text_hover {
-  display: none;
+  display: block;
+  opacity: 0;
+  transition: 0.4s;
 }
 
 .main-services__svg {
@@ -11251,6 +11270,7 @@ footer .container .footer-body ul li a {
 footer .container .footer-body .soc a i {
   color: #a0abb7;
   font-size: 30px;
+  transition: 0.4s;
 }
 
 footer .container .footer-body .soc a i.fa-instagram {
@@ -11260,6 +11280,10 @@ footer .container .footer-body .soc a i.fa-instagram {
 footer .container .footer-body .soc a i.fa-instagram:before {
   position: relative;
   top: 1px;
+}
+
+footer .container .footer-body .soc a:hover i {
+  color: black;
 }
 
 footer .container .footer-body .subs {

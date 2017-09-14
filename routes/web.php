@@ -22,4 +22,5 @@ Route::get('contacts', 'PagesController@contacts');
 
 Route::post('callbacks', 'MailController@callbacks');
 Route::post('orders', 'MailController@orders');
+Route::post('subscribers', 'MailController@subscribers');
 

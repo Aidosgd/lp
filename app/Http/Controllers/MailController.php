@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Callback;
 use App\Order;
+use App\Subs;
+use Ibec\Subscription\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Mailer;
 use Mail;
@@ -50,6 +52,27 @@ class MailController extends Controller
         $order->fill($request->input());
 
         $order->save();
+
+        return redirect('/')->with('message', 'Письмо отправили!');
+    }
+
+    public function subscribers(Request $request, Mailer $mailer)
+    {
+        $this->validate($request, [
+            'email' => 'required|email|unique:subs',
+        ]);
+
+        $order = new Subs;
+
+        $order->fill($request->input());
+
+        $order->save();
+
+        $emails = ['aidosgd@gmail.com'];
+        $mailer->send('emails.subs', ['email' => $request->input('email')], function ($m) use ($emails) {
+            $m->from('info@perspectiva-lombard.kz', 'Заявка на товар');
+            $m->to($emails, 'Aidos')->subject('Новый подписчик');
+        });
 
         return redirect('/')->with('message', 'Письмо отправили!');
     }

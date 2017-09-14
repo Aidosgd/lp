@@ -27,7 +27,15 @@
                     </div>
                     <div class="col-md-3 col-xs-6">
                         <h4>Подписка на рассылку</h4>
-                        <input class="subs" type="text" placeholder="Ваш e-mail">
+                        <form action="/subscribers" method="post">
+                            <input class="subs" name="email" type="email" placeholder="Ваш e-mail">
+                            <br>
+                            @if (count($errors) > 0)
+                                @foreach ($errors->all() as $error)
+                                    {{ $error }} <br>
+                                @endforeach
+                            @endif
+                        </form>
                     </div>
                 </div>
             </div>

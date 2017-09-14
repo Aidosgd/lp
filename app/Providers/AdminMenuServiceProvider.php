@@ -94,6 +94,7 @@ class AdminMenuServiceProvider extends ServiceProvider
                 app('admin_menu')->addSection('settings', 'Заказы');
                 app('admin_menu')->addItem('settings', '/admin/callbacks', 'Заказы на звонок');
                 app('admin_menu')->addItem('settings', '/admin/orders', 'Заказ товара');
+                app('admin_menu')->addItem('settings', '/admin/subs', 'Подписчики');
             }
         });
 

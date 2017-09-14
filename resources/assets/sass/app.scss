@@ -145,6 +145,9 @@ header{
     &--first{
       margin-top: 0px;
       width: 154px;
+      background: url(/images/0913585e-7bdd-49dc-a18d-b08b1178a8d1.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
       &:hover{
         .hover-img{
           transition: 0.4s;
@@ -163,6 +166,9 @@ header{
     }
     &--second{
       padding-top: 15px;
+      background: url(/images/e7239da9-afae-4d8c-bbae-d801094425a8.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
       &:hover{
         .hover-img{
           transition: 0.4s;
@@ -182,6 +188,9 @@ header{
       margin-top: -30px;
       position: relative;
       top: 20px;
+      background: url(/images/8205f225-c291-4b1b-a6e2-9ab50690d72a.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
       &:hover{
         .hover-img{
           transition: 0.4s;
@@ -207,6 +216,18 @@ header{
     background-size: contain;
   }
   &__item{
+    &:hover{
+      .main-services__icon{
+        img{
+          opacity: 0;
+        }
+        .text_hover{
+          display: block;
+          opacity: 1;
+          transition: 0.4s;
+        }
+      }
+    }
     a{
       position: relative;
       display: block;
@@ -221,19 +242,18 @@ header{
     position: absolute;
     top: 50%;
     left: 50%;
-    &:hover{
-      .text_hover{
-        display: block;
-      }
-      img{
-        display: none;
-      }
+    img{
+      position: relative;
+      top: 60px;
+      transition: 0.4s;
     }
     &--first{
       transform: translateX(-50%)translateY(-90%);
     }
     .text_hover{
-      display: none;
+      display: block;
+      opacity: 0;
+      transition: 0.4s;
     }
   }
   &__svg{
@@ -324,12 +344,18 @@ footer{
           i{
             color: #a0abb7;
             font-size: 30px;
+            transition: 0.4s;
             &.fa-instagram{
               font-size: 32px;
               &:before{
                 position: relative;
                 top: 1px;
               }
+            }
+          }
+          &:hover{
+            i{
+              color: black;
             }
           }
         }
