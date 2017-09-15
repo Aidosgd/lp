@@ -11100,6 +11100,7 @@ header .navbar .collapse .nav.navbar-right a span {
   background: url(/images/8205f225-c291-4b1b-a6e2-9ab50690d72a.jpg);
   background-size: contain;
   background-repeat: no-repeat;
+  background-position-y: 10px;
 }
 
 .main-nav__svg--third:hover .hover-img {

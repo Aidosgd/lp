@@ -81,6 +81,7 @@ class HomeController extends Controller
                     'product_type' => $product_post->node->fields->product_type,
                     'product_brand' => $product_post->node->fields->manufacturer_1,
                     'product_case' => $product_post->node->fields->product_case,
+                    'created_at' => $product_post->created_at->format('d.m.Y'),
                     'show' => true,
                 ]);
             }
