@@ -14,7 +14,7 @@ class MailController extends Controller
 {
     public function callbacks(Request $request, Mailer $mailer)
     {
-        $emails = ['vlasovmaxim96@gmail.com', 'aidosgd@gmail.com'];
+        $emails = ['info@perspectiva-lombard.kz', 'aidosgd@gmail.com'];
         $mailer->send('emails.mail', ['name' => $request->input('name'), 'phone' => $request->input('phone')], function ($m) use ($emails) {
             $m->from('info@perspectiva-lombard.kz', 'Заявка на звонок');
             $m->to($emails, 'Aidos')->subject('Заявка на звонок');
@@ -31,12 +31,12 @@ class MailController extends Controller
 
         $calls->save();
 
-        return redirect('/')->with('message', 'Письмо отправили!');
+        return redirect('/')->with('message', 'Ваша заявка принята. Мы Вам перезвоним.');
     }
 
     public function orders(Request $request, Mailer $mailer)
     {
-        $emails = ['vlasovmaxim96@gmail.com', 'aidosgd@gmail.com'];
+        $emails = ['info@perspectiva-lombard.kz', 'aidosgd@gmail.com'];
         $mailer->send('emails.mail', ['name' => $request->input('name'), 'phone' => $request->input('phone')], function ($m) use ($emails) {
             $m->from('info@perspectiva-lombard.kz', 'Заявка на товар');
             $m->to($emails, 'Aidos')->subject('Заявка на товар');
@@ -53,7 +53,7 @@ class MailController extends Controller
 
         $order->save();
 
-        return redirect('/')->with('message', 'Письмо отправили!');
+        return redirect('/')->with('message', 'Мы приняли ваш заказ. Наши сотрудники свяжутся с Вами.');
     }
 
     public function subscribers(Request $request, Mailer $mailer)
@@ -68,12 +68,12 @@ class MailController extends Controller
 
         $order->save();
 
-        $emails = ['aidosgd@gmail.com'];
+        $emails = ['aidosgd@gmail.com', 'info@perspectiva-lombard.kz'];
         $mailer->send('emails.subs', ['email' => $request->input('email')], function ($m) use ($emails) {
             $m->from('info@perspectiva-lombard.kz', 'Заявка на товар');
             $m->to($emails, 'Aidos')->subject('Новый подписчик');
         });
 
-        return redirect('/')->with('message', 'Письмо отправили!');
+        return redirect('/')->with('message', 'Вы успешно подписались на рассылку.');
     }
 }
