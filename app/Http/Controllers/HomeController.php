@@ -280,6 +280,14 @@ class HomeController extends Controller
             $q->where('slug', $slug);
         })->first();
 
+        $seo = [
+            'title' => $product->node->seo_title,
+            'description' => $product->node->seo_description,
+            'keywords' => $product->node->seo_keywords
+        ];
+
+        view()->share(compact('seo'));
+
         $manufacturer = [
             1 => 'manufacturer_1',
             2 => 'manufacturer_2',

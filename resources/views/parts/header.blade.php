@@ -36,7 +36,7 @@
                         <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" data-toggle="modal" data-target="#myModal">+7 707 777 77 77 <i class="fa fa-whatsapp" style="padding: 0 5px;"></i><i class="fa fa-telegram"></i><span>Перезвоните мне <i class="fa fa-phone"></i></span></a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#myModal">+7 (700) 090-90-67  <i class="fa fa-whatsapp" style="padding: 0 5px;"></i><i class="fa fa-telegram"></i><span>Перезвоните мне <i class="fa fa-phone"></i></span></a></li>
                         <!--<li class="dropdown">-->
                         <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>-->
                         <!--<ul class="dropdown-menu">-->

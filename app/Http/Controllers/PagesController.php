@@ -21,12 +21,19 @@ class PagesController extends Controller
             $q->where('slug', $slug);
         })->first();
 
+        $seo = [
+            'title' => $post->node->seo_title,
+            'description' => $post->node->seo_description,
+            'keywords' => $post->node->seo_keywords
+        ];
+
+        view()->share(compact('seo'));
+
         return view('pages.show', compact('main_menu', 'post'));
     }
 
     public function contacts()
     {
-
         return view('pages.contacts');
     }
 }

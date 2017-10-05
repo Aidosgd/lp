@@ -268,7 +268,7 @@
                                     <a href="/catalog/jewelries">
                                         Ювелирные украшения
                                         <div class="main-nav__svg--second">
-                                            <img class="hover-img" src="/images/581C82D9.jpg" alt="">
+                                            <img class="hover-img" style="transform: inherit;" src="/images/blue-diamond-rings.png" alt="">
                                             <svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                  viewBox="0 0 408 319.5" style="enable-background:new 0 0 408 319.5;" xml:space="preserve">
                       <style type="text/css">

@@ -1,62 +1,62 @@
 <footer>
+	
+	<!-- RedHelper -->
+<script id="rhlpscrtg" type="text/javascript" charset="utf-8" async="async" 
+	src="https://web.redhelper.ru/service/main.js?c=perspectivalombard">
+</script> 
+<!--/Redhelper -->
+	
+	<meta name="yandex-verification" content="b2f1ba88b877010c" />
 
-    <!-- RedHelper -->
-    <script id="rhlpscrtg" type="text/javascript" charset="utf-8" async="async"
-            src="https://web.redhelper.ru/service/main.js?c=perspectivalombard">
-    </script>
-    <!--/Redhelper -->
-
-    <meta name="yandex-verification" content="b2f1ba88b877010c" />
-
-    <script data-skip-moving="true">
+	<script data-skip-moving="true">
         (function(w,d,u,b){
-            s=d.createElement('script');r=(Date.now()/1000|0);s.async=1;s.src=u+'?'+r;
-            h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
+                s=d.createElement('script');r=(Date.now()/1000|0);s.async=1;s.src=u+'?'+r;
+                h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
         })(window,document,'https://cdn.bitrix24.kz/b5152925/crm/site_button/loader_2_6zuteu.js');
-    </script>
+</script>
+	
+	<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter46120422 = new Ya.Metrika({
+                    id:46120422,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true
+                });
+            } catch(e) { }
+        });
 
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript" >
-        (function (d, w, c) {
-            (w[c] = w[c] || []).push(function() {
-                try {
-                    w.yaCounter46120422 = new Ya.Metrika({
-                        id:46120422,
-                        clickmap:true,
-                        trackLinks:true,
-                        accurateTrackBounce:true,
-                        webvisor:true,
-                        trackHash:true
-                    });
-                } catch(e) { }
-            });
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
 
-            var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function () { n.parentNode.insertBefore(s, n); };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/watch.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/46120422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+	
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107318212-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
 
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else { f(); }
-        })(document, window, "yandex_metrika_callbacks");
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/46120422" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
+  gtag('config', 'UA-107318212-1');
+</script>
 
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107318212-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments)};
-        gtag('js', new Date());
-
-        gtag('config', 'UA-107318212-1');
-    </script>
-
-
+	
     <div class="container">
         <div class="footer-body">
             <div class="container-fluid">

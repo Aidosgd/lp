@@ -465,15 +465,15 @@
 
         function init() {
             var myMap = new ymaps.Map("map", {
-                    center: [43.259857, 76.937084],
+                    center: [43.260028, 76.943435],
                     zoom: 16,
                     controls: []
                 }),
 
                 // Создаем метку с помощью вспомогательного класса.
-                myPlacemark1 = new ymaps.Placemark([43.259857, 76.937084], {
+                myPlacemark1 = new ymaps.Placemark([43.260028, 76.943435], {
                     // Свойства.
-                    ballonContent: 'IBECSystems',
+                    ballonContent: 'ПЕРСПЕКТИВА',
                 });
 
             //myMap.controls.add('smallZoomControl');
