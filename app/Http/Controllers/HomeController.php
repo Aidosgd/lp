@@ -266,6 +266,14 @@ class HomeController extends Controller
 
         }
 
+        $seo = [
+            'title' => 'Купить оригинальные швейцарские часы по самым низким ценам | Часовой Ломбард «Перспектива»,',
+            'description' => 'В нашем магазине часов вы можете недорого купить оригинальные швейцарские часы. Приобретая у нас часы, будьте уверены, что они оригинальны и находятся в состоянии новых часов.',
+            'keywords' => 'купить швейцарские часы, швейцарские часы бу, купить оригинальные часы,'
+        ];
+
+        view()->share(compact('seo'));
+
         return view('catalog.index', compact('products', 'category', 'productBrand', 'fields2',
             'productCondition', 'productSex', 'productType', 'productCase', 'productMaterialCase', 'minPrice', 'maxPrice'));
     }
