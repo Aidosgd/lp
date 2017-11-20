@@ -11197,6 +11197,8 @@ header .navbar .collapse .nav.navbar-right a span {
 .main-products .product {
   text-align: center;
   border: 1px solid #b1b1b1;
+  min-height: 310px;
+  padding-top: 10px;
 }
 
 .main-products .product a {

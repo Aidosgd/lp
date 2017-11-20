@@ -17,5 +17,5 @@ elixir(mix => {
     mix.sass('app.scss')
         .copy('resources/assets/images/', 'public/images/')
         .copy('node_modules/font-awesome/fonts', 'public/fonts/')
-        .webpack('app.js').browserSync({'proxy' : 'lombard.dev'});
+        .webpack('app.js').browserSync({'proxy' : 'lp.dev'});
 });

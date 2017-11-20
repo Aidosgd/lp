@@ -447,8 +447,8 @@
                             if(parseInt(item.price) < parseInt(item2.price)) return 1;
                             return 0;
                         }else{
-                            if(item.created_at < item2.created_at) return -1;
-                            if(item.created_at > item2.created_at) return 1;
+                            if(item.created_at > item2.created_at) return -1;
+                            if(item.created_at < item2.created_at) return 1;
                             return 0;
                         }
                     })
@@ -482,6 +482,8 @@
                     $('.sort-by select').on('change', function(){
                         _this.sortBy(this.value);
                     });
+
+                    _this.sortBy(3);
                 });
 
                 var windowHeight = $('html').height(),
