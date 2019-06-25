@@ -430,9 +430,13 @@
                         <polygon class="st12" points="45.3,86.3 44.1,100.5 57.3,90.8 "/>
                     </svg>
                     <div class="text">
-                        +7 (700) 090-90-67 <br>
+                        +7 (700) 090-90-67 (Алма-Ата) <br>
+						+7 (701) 033-35-53 (Астана) <br>
                         г. Алма-Ата ул. Гоголя 111/87 <br>
+						г. Астана ул. Кабанбай батыра 12, нп12 <br>
                         Пн-Пт: 10:00 - 19:00
+						
+				
                     </div>
                 </div>
                 
@@ -447,6 +451,18 @@
 
                     <div class="slide">
                         <img class="img-responsive" src="/images/498a96a1136d05ca9fe78b26a7f65484IMG-20160311-WA0017.jpg">
+                    </div>
+					
+					 <div class="slide">
+                        <img class="img-responsive" src="/images/astana1.jpeg">
+                    </div>
+
+                    <div class="slide">
+                        <img class="img-responsive" src="/images/astana2.jpeg">
+                    </div>
+
+                    <div class="slide">
+                        <img class="img-responsive" src="/images/astana3.jpeg">
                     </div>
                 </div>
             </div>
