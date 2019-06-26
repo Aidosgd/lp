@@ -131,7 +131,7 @@
                     <div class="clearfix"></div>
 
                     <div class="main-products">
-                        <div class="row">
+                        <div v-if="ready" class="row">
                             <div v-for="product in products" v-if="product.show" v-cloak class="col-md-3">
                                 <div class="product">
                                     <a v-bind:href="product.link">
@@ -144,6 +144,11 @@
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                        <div v-if="!ready" class="row">
+                            <h1 class="text-center">
+                                loading
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -196,6 +201,7 @@
         var app = new Vue({
             el: '#app',
             data: {
+                ready: false,
                 products: {!! $products !!},
                 productsAll: {!! $products !!},
                 productsDeleted: {},
@@ -484,6 +490,7 @@
                     });
 
                     _this.sortBy(3);
+                    _this.ready = true;
                 });
 
                 var windowHeight = $('html').height(),
